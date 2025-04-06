@@ -1,7 +1,17 @@
-# JPA Template
-This is a template for creating REST APIs using Java, JPA, Lombok, Javalin and Hibernate.
+# Casper Gervig Backend Exam 2025
+CPH-business email : cph-cg201@cphbusiness.dk
 
-# Endpoint Table
+# Purpose
+
+# App Endpoint Table
+
+| Endpoints | Method | Description |
+|:----------|:-------|:------------|
+| api/      |        |             |
+
+# Theoretical questions
+
+# Security Endpoint Table
 
 | Endpoints                         | Method | Secured      | Description                     |
 |:----------------------------------|:-------|:------------:|:--------------------------------|
