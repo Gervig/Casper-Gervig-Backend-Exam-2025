@@ -43,6 +43,41 @@ To run this project first create a resources folder in the src/main/java directo
 | api/skilessons/{lessonId}/instructors/{instructorId}	 | PUT    | Add an existing instructor to an existing ski lesson.    |
 | api/skilessons/populate	                              | POST   | Populate the database with ski lessons and instructors.  |
 
+# HTTP responses
+
+**api/skilessons/populate (POST)**
+- Returns an empty response body and a status code 200. This will populate the database with 4 Ski lessons and 3 instructors.
+
+**api/skilessons (GET)**
+- Returns a 4 Ski lessons, first 2 has instructor with ID 1, 3rd has instructor with ID 2 and 4th has no instructor (null)
+
+**api/skilessons/1 (GET)**
+- Returns the Ski lesson with ID 1 (Whistler Blackcomb, Canada).
+  
+**api/skilessons/42 (GET)**
+- Returns with a message saying the lesson could not be found and a status code 404, because there is no ski lesson with ID 42.
+
+**api/skilessons (POST)**
+- Returns a newly posted ski lesson (Cortina d'Ampezzo, Italy).
+
+**api/skilessons/1 (PUT)**
+- Returns with a newly updated ski lesson with ID 1, that now has an updated price of 780.00
+
+**api/skilessons/42 (PUT)**
+- Returns with a message saying the lesson could not be found and a status code 404, because there is no ski lesson with ID 42.
+
+**api/skilessons/1 (DELTE)**
+- Returns with an empty body and a status code of 204, if run again it will give a message saying no lesson with that ID and a status code of 404. Because that lesson was just deleted.
+
+**api/skilessons/42 (DELTE)**
+- Returns a message saying no lesson with that ID and a status code of 404. Because there is no lesson with ID 42.
+
+**api/skilessons/2/instructors/3 (PUT)**
+- Returns a newly updated lesson with a new instructor with ID 3
+
+**api/skilessons/2/instructors/42 (PUT)**
+- Return with a message saying instructor lesson could not be found and a status code 404. Because there is no instructor with ID 42.
+
 # Theoretical questions
 **num** : question 
 * answer
