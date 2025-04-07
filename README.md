@@ -10,7 +10,7 @@ CPH-business email : cph-cg201@cphbusiness.dk
 
 To run this project first create a resources folder in the src/main/java directory. In this folder create a "config.properties" file with the following lines:
 
-* DB_NAME=insert your own database
+* DB_NAME=insert your own database name here
 * DB_USERNAME=postgres
 * DB_PASSWORD=postgres
 * SECRET_KEY="insert your own secret key here, ideally 30 signs or more"
