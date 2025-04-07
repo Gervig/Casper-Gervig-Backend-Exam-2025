@@ -68,9 +68,9 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>
         try (EntityManager em = emf.createEntityManager())
         {
             em.getTransaction().begin();
-            SkiLesson updatedTrip = em.merge(skiLesson);
+            SkiLesson updatedSkiLesson = em.merge(skiLesson);
             em.getTransaction().commit();
-            return updatedTrip;
+            return updatedSkiLesson;
         } catch (Exception e)
         {
             throw new ApiException(401, "Error updating Ski lesson", e);
