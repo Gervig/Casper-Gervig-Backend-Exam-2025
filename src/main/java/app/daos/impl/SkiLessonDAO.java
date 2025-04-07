@@ -1,17 +1,21 @@
 package app.daos.impl;
 
 import app.daos.IDAO;
+import app.daos.ISkiLessonInstructorDAO;
+import app.entities.Instructor;
 import app.entities.SkiLesson;
 import app.exceptions.ApiException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
+import java.util.Set;
 
-public class SkiLessonDAO implements IDAO<SkiLesson, Long>
+public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructorDAO<Long>
 {
     private static EntityManagerFactory emf;
     private static SkiLessonDAO instance;
+    private static InstructorDAO instructorDAO = InstructorDAO.getInstance(emf);
 
     // singleton
     public static SkiLessonDAO getInstance(EntityManagerFactory _emf)
@@ -23,6 +27,7 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>
         emf = _emf;
         return instance;
     }
+
     @Override
     public SkiLesson create(SkiLesson skiLesson)
     {
@@ -95,5 +100,47 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>
         {
             throw new ApiException(401, "Error removing Ski lesson", e);
         }
+    }
+
+    @Override
+    public void addInstructorToSkiLesson(Long lessonId, Long instructorId)
+    {
+        try
+        {
+            // ensures that the emf is instantiated
+            SkiLessonDAO skiLessonDAO = getInstance(emf);
+
+            // finds instructor and lesson
+            Instructor instructor = instructorDAO.read(instructorId);
+            SkiLesson skiLesson = skiLessonDAO.read(lessonId);
+
+            // checks if instructor and lesson was found
+            if(instructor == null || skiLesson == null)
+            {
+                throw new NullPointerException();
+            }
+
+            // adds lesson to instructor
+            instructor.addLesson(skiLesson);
+            // sets instructor to lesson, this will overwrite existing instructors!
+            skiLesson.setInstructor(instructor);
+
+            // updates the lesson and instructor
+            skiLessonDAO.update(skiLesson);
+            instructorDAO.update(instructor);
+        } catch (NullPointerException ne)
+        {
+            throw new ApiException(404, "Could not find instructor or Ski lesson", e);
+        }
+        catch (Exception e)
+        {
+            throw new ApiException(401, "Error adding instructor to instructor to Ski lesson", e);
+        }
+    }
+
+    @Override
+    public Set<SkiLesson> getSkiLessonsByInstructor(Long instructorId)
+    {
+        return null;
     }
 }
