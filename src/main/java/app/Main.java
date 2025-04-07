@@ -1,8 +1,8 @@
 package app;
 
 import app.config.HibernateConfig;
-import app.populators.RolePopulator;
-import app.populators.UserPopulator;
+import app.populators.SecurityPopulators.RolePopulator;
+import app.populators.SecurityPopulators.UserPopulator;
 import app.rest.ApplicationConfig;
 import app.rest.Routes;
 import app.security.daos.RoleDAO;
