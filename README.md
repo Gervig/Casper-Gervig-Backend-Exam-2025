@@ -4,6 +4,9 @@ CPH-business email : cph-cg201@cphbusiness.dk
 # Purpose
 Backend system for an e-commerce platform offering ski instructor services. The platform should manage ski instructor details, and the ski lessons that they lead. This system will include managing instructor profiles, their lesson schedules, and client bookings.
 
+# Choices
+The task said that the DAO classes should take DTOs and return DTOs, I chose to use entities here and mapped the entities to DTOs in the controller.
+
 # Setup
 
 ### Config properties
