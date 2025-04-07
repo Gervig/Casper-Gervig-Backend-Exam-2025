@@ -21,31 +21,33 @@ public class SkiLessonService
         List<SkiLessonDTO> lessonDTOS = new ArrayList<>();
         try
         {
+            // http request to get ski lesson for a certain level
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(buildUri(level)))
                     .GET()
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+            // if the response gives a success, the status code will be 200
             if (response.statusCode() == 200)
             {
                 JsonNode rootNode = objectMapper.readTree(response.body());
 
+                // goes through the results which is inside the array called "lessons"
                 for (JsonNode lessonNode : rootNode.path("lessons"))
                 {
+                    // reads the different values for the keys: title, level and durationMinutes
                     String title = lessonNode.path("title").asText();
-                    String description = lessonNode.path("description").asText();
                     String lessonLevel = lessonNode.path("level").asText();
                     int duration = lessonNode.path("durationMinutes").asInt();
 
-                    // Optional fields like createdAt/updatedAt if your DTO uses them
-                    // LocalDateTime createdAt = LocalDateTime.parse(lessonNode.path("createdAt").asText());
-
+                    // creates a DTO with the values from the API
                     SkiLessonDTO dto = new SkiLessonDTO();
                     dto.setName(title);
-                    dto.setLevel(Level.valueOf(lessonLevel.toUpperCase())); // be sure your enum matches
+                    dto.setLevel(Level.valueOf(lessonLevel.toUpperCase())); // our enums are uppercase
                     dto.setDurationMinutes(duration);
 
+                    // adds the DTO to the list
                     lessonDTOS.add(dto);
                 }
             }
@@ -58,6 +60,7 @@ public class SkiLessonService
     }
 
 
+    // helper method to build uri depending on the level
     public static String buildUri(Level level)
     {
         String levelString = level.toString().toLowerCase(); // API is casesensitive

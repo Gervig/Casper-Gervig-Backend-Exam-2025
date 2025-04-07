@@ -76,3 +76,7 @@ Content-Type: application/json
 ### Assign an instructor with ID 42 to a lesson with ID 2 (This will fail 404)
 PUT http://localhost:7070/api/skilessons/2/instructors/42
 Content-Type: application/json
+
+### Fetch lessons from external API for lesson with level BEGINNER
+GET http://localhost:7070/api/skilessons/fetch/BEGINNER
+Content-Type: application/json

@@ -1,17 +1,12 @@
 package app.rest;
 
 import app.controllers.impl.SkiLessonController;
-import app.daos.impl.InstructorDAO;
-import app.daos.impl.SkiLessonDAO;
 import app.dtos.ErrorMessage;
 import app.dtos.SkiLessonDTO;
-import app.entities.Instructor;
-import app.entities.SkiLesson;
-import app.populators.InstructorPopulator;
-import app.populators.SkiLessonPopulator;
+import app.enums.Level;
+import app.services.SkiLessonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.apibuilder.EndpointGroup;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -142,6 +137,12 @@ public class Routes
                 post("/populate", ctx ->
                 {
                     skiLessonController.populate();
+                });
+                get("/fetch/{level}", ctx ->
+                {
+                    Level level = Level.valueOf(ctx.pathParam("{level}"));
+                    List<SkiLessonDTO> lessonDTOS = SkiLessonService.getLessons(level);
+                    ctx.json(lessonDTOS);
                 });
             });
         };

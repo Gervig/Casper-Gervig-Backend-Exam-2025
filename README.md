@@ -10,7 +10,7 @@ Backend system for an e-commerce platform offering ski instructor services. The 
 ### DAO classes
 * The task said that the DAO classes should take DTOs and return DTOs, I chose to use entities here and mapped the entities to DTOs in the controller. Given more time I would have done it the other way.
 ### Location (longitude & latitude)
-* In the SkiLesson class we were asked to add a Location that contained longitude and latitude. I chose to simply add those to the SkiLesson directly. Given more time I would have made a one-to-one relation between Location and SkiLesson.
+* In the SkiLesson class we were asked to add a Location that contained longitude and latitude. I chose to simply add those to the SkiLesson directly. Given more time I would have made an entity for Location that had longitude and latitude which related to a Ski lesson.
 ### addInstructorToSkiLesson method
 * The addInstructorToSkiLesson method was supposed to return void, but I let it return a SkiLesson, so I can test that the updated lesson actually gets updated in my http request.
 # Setup

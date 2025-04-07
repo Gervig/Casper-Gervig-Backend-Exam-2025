@@ -10,6 +10,7 @@ import app.enums.Level;
 import app.exceptions.ApiException;
 import app.populators.InstructorPopulator;
 import app.populators.SkiLessonPopulator;
+import app.services.SkiLessonService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
@@ -152,7 +153,7 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
 
     public List<SkiLessonDTO> fetchFromAPI(Level level)
     {
-        List<SkiLessonDTO> lessonDTOS = new ArrayList<>();
+        List<SkiLessonDTO> lessonDTOS = SkiLessonService.getLessons(level);
 
         return lessonDTOS;
     }
