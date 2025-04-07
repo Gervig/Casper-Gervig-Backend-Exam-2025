@@ -31,6 +31,9 @@ To run this project first create a resources folder in the src/main/java directo
 * When running the program for the first time, ensure that a Postgres database is created using the values from the config.properties file.
 * There will also be a few pops ups asking to enable annotations, say yes to these.
 
+### Testing REST Endpoints
+* Run the tests one by one, otherwise they will mostly fail. If I had more time I would work on making them all works at once.
+
 # App Endpoint Table
 
 | Endpoint                                              | Method | Description                                              |

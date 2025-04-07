@@ -25,6 +25,7 @@ public class SkiLessonDTO
     private String name;
     private BigDecimal price;
     private Level level;
+    private int durationMinutes;
 
     private InstructorDTO instructor;
 

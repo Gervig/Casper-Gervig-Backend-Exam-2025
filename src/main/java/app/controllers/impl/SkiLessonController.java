@@ -6,12 +6,14 @@ import app.daos.impl.SkiLessonDAO;
 import app.dtos.SkiLessonDTO;
 import app.entities.Instructor;
 import app.entities.SkiLesson;
+import app.enums.Level;
 import app.exceptions.ApiException;
 import app.populators.InstructorPopulator;
 import app.populators.SkiLessonPopulator;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
@@ -146,5 +148,12 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
             // persists the last lesson with no instructor
             skiLessonDAO.create(lessons.get(3));
         }
+    }
+
+    public List<SkiLessonDTO> fetchFromAPI(Level level)
+    {
+        List<SkiLessonDTO> lessonDTOS = new ArrayList<>();
+
+        return lessonDTOS;
     }
 }

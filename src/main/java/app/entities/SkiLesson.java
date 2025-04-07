@@ -35,6 +35,8 @@ public class SkiLesson
     private BigDecimal price;
     @Setter
     private Level level;
+    @Setter
+    private int durationMinutes;
 
     @ManyToOne
     @JoinColumn(name = "instructor_id")
