@@ -5,19 +5,22 @@ CPH-business email : cph-cg201@cphbusiness.dk
 
 
 # Setup
-To run this project first create a resources folder in the src/main/java directory. In this folder create a config.properties file with the following lines:
 
-DB_NAME=insert your own database
+### Config properties
 
-DB_USERNAME=postgres
+To run this project first create a resources folder in the src/main/java directory. In this folder create a "config.properties" file with the following lines:
 
-DB_PASSWORD=postgres
+* DB_NAME=insert your own database
+* DB_USERNAME=postgres
+* DB_PASSWORD=postgres
+* SECRET_KEY="insert your own secret key here, ideally 30 signs or more"
+* ISSUER="insert your name"
+* TOKEN_EXPIRE_TIME=1800000
 
-SECRET_KEY="insert your own secret key here, ideally 30 signs or more"
+### First run
 
-ISSUER="insert your name"
-
-TOKEN_EXPIRE_TIME=1800000
+* When running the program for the first time, ensure that a Postgres database is created using the values from the config.properties file.
+* There will also be a few pops ups asking to enable annotations, say yes to these.
 
 # App Endpoint Table
 
