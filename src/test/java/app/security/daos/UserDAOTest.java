@@ -2,8 +2,8 @@ package app.security.daos;
 
 import app.config.HibernateConfig;
 import app.exceptions.ValidationException;
-import app.populators.RolePopulator;
-import app.populators.UserPopulator;
+import app.populators.SecurityPopulators.RolePopulator;
+import app.populators.SecurityPopulators.UserPopulator;
 import app.security.entities.Role;
 import app.security.entities.User;
 import dk.bugelhartmann.UserDTO;

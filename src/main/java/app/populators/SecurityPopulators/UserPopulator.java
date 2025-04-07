@@ -1,4 +1,4 @@
-package app.populators;
+package app.populators.SecurityPopulators;
 
 import app.security.entities.Role;
 import app.security.entities.User;
