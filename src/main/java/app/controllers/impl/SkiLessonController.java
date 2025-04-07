@@ -5,6 +5,7 @@ import app.daos.impl.InstructorDAO;
 import app.daos.impl.SkiLessonDAO;
 import app.dtos.SkiLessonDTO;
 import app.entities.SkiLesson;
+import app.exceptions.ApiException;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
     }
 
     @Override
-    public List<SkiLessonDTO> getAllLessons()
+    public List<SkiLessonDTO> getAllLessons() throws ApiException
     {
         // reads all the lessons from the database
         List<SkiLesson> lessons = skiLessonDAO.readAll();
@@ -39,37 +40,39 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
     }
 
     @Override
-    public SkiLessonDTO getLessonById(Long id)
+    public SkiLessonDTO getLessonById(Long id) throws ApiException
     {
-
+        SkiLesson lesson = skiLessonDAO.read(id);
+        SkiLessonDTO skiLessonDTO = new SkiLessonDTO(lesson, true);
+        return skiLessonDTO;
     }
 
     @Override
-    public SkiLessonDTO createLesson(SkiLessonDTO lesson)
+    public SkiLessonDTO createLesson(SkiLessonDTO lessonDTO) throws ApiException
+    {
+        SkiLesson lesson = lessonDTO
+    }
+
+    @Override
+    public SkiLessonDTO updateLesson(SkiLessonDTO lesson) throws ApiException
     {
         return null;
     }
 
     @Override
-    public SkiLessonDTO updateLesson(SkiLessonDTO lesson)
-    {
-        return null;
-    }
-
-    @Override
-    public void deleteLesson(Long id)
+    public void deleteLesson(Long id) throws ApiException
     {
 
     }
 
     @Override
-    public void addInstructor(Long lessonId, Long instructorId)
+    public void addInstructor(Long lessonId, Long instructorId) throws ApiException
     {
 
     }
 
     @Override
-    public void removeLesson(SkiLessonDTO lesson)
+    public void removeLesson(SkiLessonDTO lesson) throws ApiException
     {
 
     }

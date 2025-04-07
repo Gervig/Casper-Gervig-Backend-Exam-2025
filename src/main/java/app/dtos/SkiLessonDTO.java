@@ -38,11 +38,25 @@ public class SkiLessonDTO
         this.price = skiLesson.getPrice();
         this.level = skiLesson.getLevel();
 
-        if(includeDetails && skiLesson.getInstructor() != null)
+        if (includeDetails && skiLesson.getInstructor() != null)
         {
             this.instructor = new InstructorDTO(skiLesson.getInstructor(), false);
             this.instructor.getLessons().add(this);
         }
 
+    }
+
+    public SkiLessonDTO toEntity()
+    {
+        SkiLesson lesson = SkiLesson.builder()
+                .id(this.id)
+                .starttime(this.starttime)
+                .endtime(this.endtime)
+                .longitude(this.longitude)
+                .latitude(this.latitude)
+                .name(this.name)
+                .price(this.price)
+                .level(this.level)
+                .build();
     }
 }
