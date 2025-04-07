@@ -17,15 +17,23 @@ import java.time.LocalDateTime;
 @Entity
 public class SkiLesson
 {
+    // all attributes have setters, except id. I could have added @Setter to the class otherwise
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Setter
     private LocalDateTime starttime;
+    @Setter
     private LocalDateTime endtime;
+    @Setter
     private double longitude;
+    @Setter
     private double latitude;
+    @Setter
     private String name;
+    @Setter
     private BigDecimal price;
+    @Setter
     private Level level;
 
     @ManyToOne

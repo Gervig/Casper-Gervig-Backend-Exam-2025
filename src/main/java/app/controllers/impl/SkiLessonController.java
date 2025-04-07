@@ -73,9 +73,15 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
     }
 
     @Override
-    public SkiLessonDTO updateLesson(SkiLessonDTO lesson) throws ApiException
+    public SkiLessonDTO updateLesson(SkiLessonDTO lessonDTO) throws ApiException
     {
-        return null;
+        SkiLesson existingLesson = skiLessonDAO.read(lessonDTO.getId());
+        if(existingLesson == null)
+        {
+            throw new ApiException(404, "Lesson not found");
+        }
+
+        if(lessonDTO.getStarttime() != null) existingLesson.
     }
 
     @Override
