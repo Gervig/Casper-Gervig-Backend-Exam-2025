@@ -1,3 +1,7 @@
+### Populates the database
+POST http://localhost:7070/api/skilessons/populate
+Content-Type: application/json
+
 ### Shows all the lessons
 GET http://localhost:7070/api/skilessons
 Content-Type: application/json

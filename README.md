@@ -41,7 +41,7 @@ To run this project first create a resources folder in the src/main/java directo
 | api/skilessons/{id}                                   | PUT    | Update information about a ski lesson.                   |
 | api/skilessons/{id}                                   | DELETE | Delete a ski lesson.                                     |
 | api/skilessons/{lessonId}/instructors/{instructorId}	 | PUT    | Add an existing instructor to an existing ski lesson.    |
-| api/skilessons/populate	                              | PUT    | Populate the database with ski lessons and instructors.  |
+| api/skilessons/populate	                              | POST   | Populate the database with ski lessons and instructors.  |
 
 # Theoretical questions
 **num** : question 

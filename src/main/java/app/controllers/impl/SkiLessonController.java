@@ -7,6 +7,9 @@ import app.dtos.SkiLessonDTO;
 import app.entities.Instructor;
 import app.entities.SkiLesson;
 import app.exceptions.ApiException;
+import app.populators.InstructorPopulator;
+import app.populators.SkiLessonPopulator;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
@@ -127,5 +130,21 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
         SkiLesson lesson = skiLessonDAO.addInstructorToSkiLesson(lessonId, instructorId);
         SkiLessonDTO lessonDTO = new SkiLessonDTO(lesson, true);
         return lessonDTO;
+    }
+
+    public void populate()
+    {
+        try(EntityManager em = emf.createEntityManager())
+        {
+            // fetches the lessons and instructors from populators
+            List<SkiLesson> lessons = SkiLessonPopulator.populate();
+            List<Instructor> instructors = InstructorPopulator.populate();
+
+            // persists all the instructors and their lessons
+            instructors.forEach(instructorDAO::create);
+
+            // persists the last lesson with no instructor
+            skiLessonDAO.create(lessons.get(3));
+        }
     }
 }

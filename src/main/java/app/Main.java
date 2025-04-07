@@ -28,7 +28,6 @@ public class Main
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
 
         setupDatabaseSecurity(emf);
-        setupDatbase(emf);
 
         ApplicationConfig
                 .getInstance()
@@ -57,22 +56,5 @@ public class Main
         }
     }
 
-    private static void setupDatbase(EntityManagerFactory emf)
-    {
-        try(EntityManager em = emf.createEntityManager())
-        {
-            // fetches the lessons and instructors from populators
-            List<SkiLesson> lessons = SkiLessonPopulator.populate();
-            List<Instructor> instructors = InstructorPopulator.populate();
-
-            // persists all the instructors and their lessons
-            InstructorDAO instructorDAO = InstructorDAO.getInstance(emf);
-            instructors.forEach(instructorDAO::create);
-
-            // persists the last lesson with no instructor
-            SkiLessonDAO skiLessonDAO = SkiLessonDAO.getInstance(emf);
-            skiLessonDAO.create(lessons.get(3));
-        }
-    }
 
 }

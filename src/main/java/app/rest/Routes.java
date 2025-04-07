@@ -1,10 +1,17 @@
 package app.rest;
 
 import app.controllers.impl.SkiLessonController;
+import app.daos.impl.InstructorDAO;
+import app.daos.impl.SkiLessonDAO;
 import app.dtos.ErrorMessage;
 import app.dtos.SkiLessonDTO;
+import app.entities.Instructor;
+import app.entities.SkiLesson;
+import app.populators.InstructorPopulator;
+import app.populators.SkiLessonPopulator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.apibuilder.EndpointGroup;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +57,10 @@ public class Routes
                         ErrorMessage error = new ErrorMessage("No lesson with that ID");
                         ctx.status(404).json(error);
                     }
+                });
+                post("/populate", ctx ->
+                {
+                    skiLessonController.populate();
                 });
             });
         };
