@@ -144,6 +144,19 @@ public class Routes
                     List<SkiLessonDTO> lessonDTOS = SkiLessonService.getLessons(level);
                     ctx.json(lessonDTOS);
                 });
+                get("fetch/duration/{level}", ctx ->
+                {
+                    Level level = Level.valueOf(ctx.pathParam("{level}"));
+                    List<SkiLessonDTO> lessonDTOS = SkiLessonService.getLessons(level);
+                    int totalMinutes = 0;
+                    for(SkiLessonDTO l : lessonDTOS)
+                    {
+                        totalMinutes += l.getDurationMinutes();
+                    }
+                    ctx.json(objectMapper.createObjectNode().put("msg",
+                            "Total duration of instructions for ski lessons with level "
+                            + level + " is: " + totalMinutes + " minutes"));
+                });
             });
         };
     }

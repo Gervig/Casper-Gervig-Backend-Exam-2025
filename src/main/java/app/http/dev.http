@@ -80,3 +80,7 @@ Content-Type: application/json
 ### Fetch lessons from external API for lesson with level BEGINNER
 GET http://localhost:7070/api/skilessons/fetch/BEGINNER
 Content-Type: application/json
+
+### Gets the total duration of instructions for a ski lesson with a level of BEGINNER
+GET http://localhost:7070/api/skilessons/fetch/duration/BEGINNER
+Content-Type: application/json
