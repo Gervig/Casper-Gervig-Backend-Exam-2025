@@ -1,5 +1,6 @@
 package app.dtos;
 
+import app.entities.Instructor;
 import app.entities.SkiLesson;
 import app.enums.Level;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -46,7 +47,7 @@ public class SkiLessonDTO
 
     }
 
-    public SkiLessonDTO toEntity()
+    public SkiLesson toEntity()
     {
         SkiLesson lesson = SkiLesson.builder()
                 .id(this.id)
@@ -58,5 +59,16 @@ public class SkiLessonDTO
                 .price(this.price)
                 .level(this.level)
                 .build();
+        // checks if the lesson has an instructor
+        if(this.instructor != null)
+        {
+            // creates an instructor entity
+            Instructor instructorEntity = this.instructor.toEntity();
+            // sets the instructor for the lesson
+            lesson.setInstructor(instructorEntity);
+            // adds the lesson to the instructor
+            instructorEntity.addLesson(lesson);
+        }
+        return lesson;
     }
 }

@@ -50,7 +50,7 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
     @Override
     public SkiLessonDTO createLesson(SkiLessonDTO lessonDTO) throws ApiException
     {
-        SkiLesson lesson = lessonDTO
+        SkiLesson lesson = lessonDTO.toEntity();
     }
 
     @Override
