@@ -132,6 +132,8 @@ class SkiLessonControllerTest
     @DisplayName("Test updating a lesson")
     void updateItem()
     {
+        // updates lesson with 1 one with data from the test lesson,
+        // checks if name is the newly updated one
         SkiLessonDTO lessonDTO = getTestLesson();
         try
         {
