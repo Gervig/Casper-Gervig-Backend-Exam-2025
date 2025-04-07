@@ -36,16 +36,17 @@ To run this project first create a resources folder in the src/main/java directo
 
 # App Endpoint Table
 
-| Endpoint                                              | Method | Description                                             |
-|:------------------------------------------------------|:-------|:--------------------------------------------------------|
-| api/skilessons                                        | GET    | Get all ski lessons.                                    |
-| api/skilessons/{id}                                   | GET    | Get a ski lesson by its id.                             |
-| api/skilessons                                        | POST   | Create a new ski lesson. Add instructor later.          |
-| api/skilessons/{id}                                   | PUT    | Update information about a ski lesson.                  |
-| api/skilessons/{id}                                   | DELETE | Delete a ski lesson.                                    |
-| api/skilessons/{lessonId}/instructors/{instructorId}	 | PUT    | Add an existing instructor to an existing ski lesson.   |
-| api/skilessons/populate	                              | POST   | Populate the database with ski lessons and instructors. |
-| api/skilessons/fetch/{level}	                         | GET    | Fetches lessons from an external API for a given level  |
+| Endpoint                                              | Method | Description                                                                 |
+|:------------------------------------------------------|:-------|:----------------------------------------------------------------------------|
+| api/skilessons                                        | GET    | Get all ski lessons.                                                        |
+| api/skilessons/{id}                                   | GET    | Get a ski lesson by its id.                                                 |
+| api/skilessons                                        | POST   | Create a new ski lesson. Add instructor later.                              |
+| api/skilessons/{id}                                   | PUT    | Update information about a ski lesson.                                      |
+| api/skilessons/{id}                                   | DELETE | Delete a ski lesson.                                                        |
+| api/skilessons/{lessonId}/instructors/{instructorId}	 | PUT    | Add an existing instructor to an existing ski lesson.                       |
+| api/skilessons/populate	                              | POST   | Populate the database with ski lessons and instructors.                     |
+| api/skilessons/fetch/{level}	                         | GET    | Fetches lessons from an external API for a given level                      |
+| api/skilessons/fetch/duration/{level}	                | GET    | Gets the total duration of instructions for a ski lesson with a given level |
 
 # HTTP responses
 
@@ -83,11 +84,14 @@ To run this project first create a resources folder in the src/main/java directo
 - Returns with a message saying instructor lesson could not be found and a status code 404. Because there is no instructor with ID 42.
 
 **api/skilessons/fetch/BEGINNER (GET)**
-- Returns lessons from an external API for lessons with level BEGINNER
+- Returns lessons from an external API for lessons with level BEGINNER.
+
+**api/skilessons/fetch/duration/BEGINNER (GET)**
+- Returns a message with the total duration in minutes for instruction of lessons with a given level of BEGINNER.
 
 # Theoretical questions
-**num** : question 
-* answer
+**3.3.5** : Why do we suggest a PUT method for adding an instructor to a ski lesson instead of a POST method? 
+* PUT is an update, whereas POST creates something new. Since we just want to assign an instructor to the lesson, we just update the instructor value on a lesson with PUT.
 
 # Security Endpoint Table
 
