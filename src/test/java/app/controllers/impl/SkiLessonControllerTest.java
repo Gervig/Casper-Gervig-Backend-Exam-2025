@@ -27,13 +27,16 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 
+/*
+RUN THE TESTS ONE BY ONE, THEY FAIL OTHERWISE
+ */
+
+//TODO fix test so they work when run all at once
 class SkiLessonControllerTest
 {
     private ObjectMapper objectMapper = new ObjectMapper();
     private static final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
     private static final SkiLessonController skiLessonController = new SkiLessonController(emf);
-    private static final SkiLessonDAO skiLessonDAO = SkiLessonDAO.getInstance(emf);
-    private static final InstructorDAO instructorDAO = InstructorDAO.getInstance(emf);
     private static final String contentType = "application/json";
     @BeforeEach
     void setup()
