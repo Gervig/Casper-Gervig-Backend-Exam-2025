@@ -5,6 +5,8 @@ CPH-business email : cph-cg201@cphbusiness.dk
 Backend system for an e-commerce platform offering ski instructor services. The platform should manage ski instructor details, and the ski lessons that they lead. This system will include managing instructor profiles, their lesson schedules, and client bookings.
 
 # Choices
+### IDs
+* I chose to use Long for IDs instead of integers. For the purpose of this exercise integers would have been fine, but I'm used to Long.
 ### DAO classes
 * The task said that the DAO classes should take DTOs and return DTOs, I chose to use entities here and mapped the entities to DTOs in the controller. Given more time I would have done it the other way.
 ### Location (longitude & latitude)

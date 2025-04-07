@@ -24,15 +24,33 @@ public class Routes
     {
         SkiLessonController skiLessonController = new SkiLessonController(emf);
 
-        return () -> {
-            path("skilessons", () -> //
+        return () ->
+        {
+            path("skilessons", () ->
             {
-                get("/",ctx -> { // write get path here
+                get("/", ctx ->
+                {
                     logger.info("Information about the resource that was accessed: " + ctx.path());
                     List<SkiLessonDTO> lessonDTOS = skiLessonController.getAllLessons();
                     ctx.json(lessonDTOS);
                 });
-                // write other http methods here
+                get("/{id}", ctx ->
+                {
+                    try
+                    {
+                        Long id = Long.valueOf(ctx.pathParam("id"));
+                        SkiLessonDTO lessonDTO = skiLessonController.getLessonById(id);
+                        if(lessonDTO == null)
+                        {
+                            throw new NullPointerException();
+                        }
+                        ctx.json(lessonDTO);
+                    } catch (Exception e)
+                    {
+                        ErrorMessage error = new ErrorMessage("No lesson with that ID");
+                        ctx.status(404).json(error);
+                    }
+                });
             });
         };
     }

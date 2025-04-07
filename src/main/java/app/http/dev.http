@@ -1,3 +1,11 @@
 ### Shows all the lessons
 GET http://localhost:7070/api/skilessons
 Content-Type: application/json
+
+### Get lesson with ID (This will succeed 200)
+http://localhost:7070/api/skilessons/1
+Content-Type: application/json
+
+### Get lesson with ID (This will fail 404)
+http://localhost:7070/api/skilessons/42
+Content-Type: application/json
