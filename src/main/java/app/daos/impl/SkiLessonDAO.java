@@ -105,17 +105,17 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
     @Override
     public void addInstructorToSkiLesson(Long lessonId, Long instructorId)
     {
-        try
+        try (EntityManager em = emf.createEntityManager())
         {
             // ensures that the emf is instantiated
             SkiLessonDAO skiLessonDAO = getInstance(emf);
 
             // finds instructor and lesson
-            Instructor instructor = instructorDAO.read(instructorId);
-            SkiLesson skiLesson = skiLessonDAO.read(lessonId);
+            Instructor instructor = em.find(Instructor.class, instructorId);
+            SkiLesson skiLesson = em.find(SkiLesson.class, lessonId);
 
             // checks if instructor and lesson was found
-            if(instructor == null || skiLesson == null)
+            if (instructor == null || skiLesson == null)
             {
                 throw new NullPointerException();
             }
@@ -128,11 +128,10 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
             // updates the lesson and instructor
             skiLessonDAO.update(skiLesson);
             instructorDAO.update(instructor);
-        } catch (NullPointerException ne)
+        } catch (NullPointerException npe)
         {
-            throw new ApiException(404, "Could not find instructor or Ski lesson", e);
-        }
-        catch (Exception e)
+            throw new ApiException(404, "Could not find instructor or Ski lesson", npe);
+        } catch (Exception e)
         {
             throw new ApiException(401, "Error adding instructor to instructor to Ski lesson", e);
         }
@@ -141,6 +140,26 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
     @Override
     public Set<SkiLesson> getSkiLessonsByInstructor(Long instructorId)
     {
-        return null;
+        try (EntityManager em = emf.createEntityManager())
+        {
+            Instructor instructor = em.find(Instructor.class, instructorId);
+
+            if(instructor == null)
+            {
+                throw new NullPointerException();
+            }
+
+            Set<SkiLesson> lessons = instructor.getLessons();
+
+            return lessons;
+
+        } catch (NullPointerException npe)
+        {
+            throw new ApiException(404, "Error could not find instructor", npe);
+        }
+        catch (Exception e)
+        {
+            throw new ApiException(401, "Error finding lessons for instructor", e);
+        }
     }
 }
