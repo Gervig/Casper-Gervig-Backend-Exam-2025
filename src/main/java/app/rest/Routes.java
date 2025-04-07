@@ -23,7 +23,7 @@ public class Routes
         // instantiate controllers with emf here
 
         return () -> {
-            path("", () -> // write path name here
+            path("skilessons", () -> //
             {
                 get("/",ctx -> { // write get path here
                     // write get logic here
