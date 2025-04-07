@@ -30,6 +30,7 @@ public class SkiLesson
 
     @ManyToOne
     @JoinColumn(name = "instructor_id")
+    @Setter
     private Instructor instructor;
 
 }
