@@ -1,5 +1,6 @@
 # Casper Gervig Backend Exam 2025
 CPH-business email : cph-cg201@cphbusiness.dk
+GitHub link: https://github.com/Gervig/Casper-Gervig-Backend-Exam-2025
 
 # Purpose
 Backend system for an e-commerce platform offering ski instructor services. The platform should manage ski instructor details, and the ski lessons that they lead. This system will include managing instructor profiles, their lesson schedules, and client bookings.
