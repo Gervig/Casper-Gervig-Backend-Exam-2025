@@ -30,6 +30,9 @@ public class Instructor
 
     public void addLesson(SkiLesson lesson)
     {
+        // adds the lesson to the instructor
         this.lessons.add(lesson);
+        // sets the instructor for the lesson
+        lesson.setInstructor(this);
     }
 }
