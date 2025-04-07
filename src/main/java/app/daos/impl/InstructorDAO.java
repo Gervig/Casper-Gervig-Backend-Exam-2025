@@ -5,7 +5,6 @@ import app.entities.Instructor;
 import app.exceptions.ApiException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.PersistenceException;
 
 import java.util.List;
 
@@ -79,8 +78,22 @@ public class InstructorDAO implements IDAO<Instructor, Long>
     }
 
     @Override
-    public void delete(Long aLong)
+    public void delete(Long id)
     {
-
+        try (EntityManager em = emf.createEntityManager())
+        {
+            em.getTransaction().begin();
+            Instructor instructor = em.find(Instructor.class, id);
+            if (instructor == null)
+            {
+                em.getTransaction().rollback();
+                throw new NullPointerException();
+            }
+            em.remove(instructor);
+            em.getTransaction().commit();
+        } catch (Exception e)
+        {
+            throw new ApiException(401, "Error removing instructor", e);
+        }
     }
 }
