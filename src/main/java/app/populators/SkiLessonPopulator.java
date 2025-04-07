@@ -48,6 +48,18 @@ public class SkiLessonPopulator
                 .build();
         lessons.add(s3);
 
+        // this lesson will not have an instructor
+        SkiLesson s4 = SkiLesson.builder()
+                .starttime(LocalDateTime.now())
+                .endtime(LocalDateTime.now().plusHours(5))
+                .longitude(46.0207D)
+                .latitude(7.7491D)
+                .name("Zermatt, Switzerland")
+                .price(BigDecimal.valueOf(1120.50))
+                .level(Level.ADVANCED)
+                .build();
+        lessons.add(s4);
+
         return lessons;
     }
 }

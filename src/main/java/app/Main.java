@@ -1,8 +1,14 @@
 package app;
 
 import app.config.HibernateConfig;
+import app.daos.impl.InstructorDAO;
+import app.daos.impl.SkiLessonDAO;
+import app.entities.Instructor;
+import app.entities.SkiLesson;
+import app.populators.InstructorPopulator;
 import app.populators.SecurityPopulators.RolePopulator;
 import app.populators.SecurityPopulators.UserPopulator;
+import app.populators.SkiLessonPopulator;
 import app.rest.ApplicationConfig;
 import app.rest.Routes;
 import app.security.daos.RoleDAO;
@@ -21,7 +27,8 @@ public class Main
     {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory();
 
-        setupDatabase(emf);
+        setupDatabaseSecurity(emf);
+        setupDatbase(emf);
 
         ApplicationConfig
                 .getInstance()
@@ -34,7 +41,7 @@ public class Main
 
     }
 
-    private static void setupDatabase(EntityManagerFactory emf)
+    private static void setupDatabaseSecurity(EntityManagerFactory emf)
     {
         try(EntityManager em = emf.createEntityManager())
         {
@@ -47,6 +54,24 @@ public class Main
             List<User> users = UserPopulator.populate();
             UserDAO userDAO = UserDAO.getInstance(emf);
             users.forEach(userDAO::create);
+        }
+    }
+
+    private static void setupDatbase(EntityManagerFactory emf)
+    {
+        try(EntityManager em = emf.createEntityManager())
+        {
+            // fetches the lessons and instructors from populators
+            List<SkiLesson> lessons = SkiLessonPopulator.populate();
+            List<Instructor> instructors = InstructorPopulator.populate();
+
+            // persists all the instructors and their lessons
+            InstructorDAO instructorDAO = InstructorDAO.getInstance(emf);
+            instructors.forEach(instructorDAO::create);
+
+            // persists the last lesson with no instructor
+            SkiLessonDAO skiLessonDAO = SkiLessonDAO.getInstance(emf);
+            skiLessonDAO.create(lessons.get(3));
         }
     }
 
