@@ -69,7 +69,10 @@ Content-Type: application/json
 DELETE http://localhost:7070/api/skilessons/42
 Content-Type: application/json
 
-### Assign an instructor with ID 3 to a lesson with ID 1
-PUT http://localhost:7070/api/skilessons/1/instructors/3
+### Assign an instructor with ID 3 to a lesson with ID 2 (This will succeed 200)
+PUT http://localhost:7070/api/skilessons/2/instructors/3
 Content-Type: application/json
 
+### Assign an instructor with ID 42 to a lesson with ID 2 (This will fail 404)
+PUT http://localhost:7070/api/skilessons/2/instructors/42
+Content-Type: application/json
