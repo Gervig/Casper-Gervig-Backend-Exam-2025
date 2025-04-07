@@ -4,6 +4,21 @@ CPH-business email : cph-cg201@cphbusiness.dk
 # Purpose
 
 
+# Setup
+To run this project first create a resources folder in the src/main/java directory. In this folder create a config.properties file with the following lines:
+
+DB_NAME=insert your own database
+
+DB_USERNAME=postgres
+
+DB_PASSWORD=postgres
+
+SECRET_KEY="insert your own secret key here, ideally 30 signs or more"
+
+ISSUER="insert your name"
+
+TOKEN_EXPIRE_TIME=1800000
+
 # App Endpoint Table
 
 | Endpoints | Method | Description |
