@@ -58,6 +58,22 @@ public class Routes
                         ctx.status(404).json(error);
                     }
                 });
+                post("/", ctx ->
+                {
+                    try
+                    {
+                        SkiLessonDTO incomingLesson = ctx.bodyAsClass(SkiLessonDTO.class);
+                        SkiLessonDTO returnedLesson = skiLessonController.createLesson(incomingLesson);
+
+                        //TODO write logic for not creating duplicate lessons
+
+                        ctx.json(returnedLesson);
+                    } catch (IllegalStateException ise)
+                    {
+                        ErrorMessage error = new ErrorMessage("Incorrect JSON");
+                        ctx.status(400).json(error);
+                    }
+                });
                 post("/populate", ctx ->
                 {
                     skiLessonController.populate();

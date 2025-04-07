@@ -7,9 +7,40 @@ GET http://localhost:7070/api/skilessons
 Content-Type: application/json
 
 ### Get lesson with ID (This will succeed 200)
-http://localhost:7070/api/skilessons/1
+GET http://localhost:7070/api/skilessons/1
 Content-Type: application/json
 
 ### Get lesson with ID (This will fail 404)
-http://localhost:7070/api/skilessons/42
+GET http://localhost:7070/api/skilessons/42
 Content-Type: application/json
+
+### Add a new lesson
+POST http://localhost:7070/api/skilessons
+Content-Type: application/json
+
+{
+  "starttime": [
+    2025,
+    4,
+    7,
+    11,
+    37,
+    52,
+    385537000
+  ],
+  "endtime": [
+    2025,
+    4,
+    7,
+    15,
+    37,
+    52,
+    385537000
+  ],
+  "longitude": 46.5405,
+  "latitude": 12.1357,
+  "name": "Cortina d'Ampezzo, Italy",
+  "price": 425.00,
+  "level": "BEGINNER",
+  "instructor": null
+}
