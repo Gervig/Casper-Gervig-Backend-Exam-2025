@@ -3,6 +3,7 @@ CPH-business email : cph-cg201@cphbusiness.dk
 
 # Purpose
 
+
 # App Endpoint Table
 
 | Endpoints | Method | Description |
