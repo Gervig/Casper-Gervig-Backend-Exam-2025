@@ -44,3 +44,11 @@ Content-Type: application/json
   "level": "BEGINNER",
   "instructor": null
 }
+
+### Update a lesson
+PUT http://localhost:7070/api/skilessons/1
+Content-Type: application/json
+
+{
+  "price": 780.00
+}

@@ -74,6 +74,34 @@ public class Routes
                         ctx.status(400).json(error);
                     }
                 });
+                put("/{id}", ctx ->
+                {
+                    Long id = Long.valueOf(ctx.pathParam("id"));
+                    try
+                    {
+                        // checks if the lesson exists
+                        SkiLessonDTO test = skiLessonController.getLessonById(id);
+                        if (test == null)
+                        {
+                            throw new NullPointerException();
+                        }
+                        SkiLessonDTO incomingLesson = ctx.bodyAsClass(SkiLessonDTO.class);
+                        if (incomingLesson.getId() == null)
+                        {
+                            incomingLesson.setId(id); // in case the body forgot to add the id
+                        }
+                        SkiLessonDTO returnedLesson = skiLessonController.updateLesson(incomingLesson);
+                        ctx.json(returnedLesson);
+                    } catch (IllegalStateException ise)
+                    {
+                        ErrorMessage error = new ErrorMessage("Incorrect JSON");
+                        ctx.status(400).json(error);
+                    } catch (Exception e)
+                    {
+                        ErrorMessage error = new ErrorMessage("No lesson with that ID");
+                        ctx.status(404).json(error);
+                    }
+                });
                 post("/populate", ctx ->
                 {
                     skiLessonController.populate();
