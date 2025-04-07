@@ -14,6 +14,7 @@ import app.services.SkiLessonService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -156,5 +157,37 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
         List<SkiLessonDTO> lessonDTOS = SkiLessonService.getLessons(level);
 
         return lessonDTOS;
+    }
+
+    public List<SkiLessonDTO> getByLevel(Level level)
+    {
+        List<SkiLessonDTO> lessonDTOS = getAllLessons();
+
+        // filter through the lessons that have a given level
+        lessonDTOS = lessonDTOS.stream()
+                .filter(lesson -> lesson.getLevel() == level)
+                .toList();
+
+        return lessonDTOS;
+    }
+
+    public BigDecimal sumForInstructor(Long instructorId)
+    {
+        List<SkiLessonDTO> lessonDTOS = getAllLessons();
+
+        // filther through the lessons for a given instructor
+        lessonDTOS = lessonDTOS.stream()
+                .filter(lesson -> lesson.getInstructor() != null && lesson.getInstructor().getId() == instructorId)
+                .toList();
+
+        BigDecimal sum = BigDecimal.ZERO;
+
+        // adds each price to the sum
+        for(SkiLessonDTO l : lessonDTOS)
+        {
+            sum = sum.add(l.getPrice());
+        }
+
+        return sum;
     }
 }

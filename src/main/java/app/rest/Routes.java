@@ -11,6 +11,7 @@ import jakarta.persistence.EntityManagerFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
@@ -156,6 +157,20 @@ public class Routes
                     ctx.json(objectMapper.createObjectNode().put("msg",
                             "Total duration of instructions for ski lessons with level "
                             + level + " is: " + totalMinutes + " minutes"));
+                });
+                get("/level/{level}", ctx ->
+                {
+                    Level level = Level.valueOf(ctx.pathParam("{level}"));
+                    List<SkiLessonDTO> skiLessonDTOS = skiLessonController.getByLevel(level);
+                    ctx.json(skiLessonDTOS);
+                });
+                get("/instructors/{instructorId}/sum", ctx ->
+                {
+                    Long instructorId = Long.valueOf(ctx.pathParam("instructorId"));
+                    BigDecimal sum = skiLessonController.sumForInstructor(instructorId);
+                    ctx.json(objectMapper.createObjectNode().put("msg",
+                            "Total price for lessons for instructor with ID " + instructorId
+                            + " is: " + sum));
                 });
             });
         };

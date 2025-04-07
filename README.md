@@ -36,17 +36,19 @@ To run this project first create a resources folder in the src/main/java directo
 
 # App Endpoint Table
 
-| Endpoint                                              | Method | Description                                                                 |
-|:------------------------------------------------------|:-------|:----------------------------------------------------------------------------|
-| api/skilessons                                        | GET    | Get all ski lessons.                                                        |
-| api/skilessons/{id}                                   | GET    | Get a ski lesson by its id.                                                 |
-| api/skilessons                                        | POST   | Create a new ski lesson. Add instructor later.                              |
-| api/skilessons/{id}                                   | PUT    | Update information about a ski lesson.                                      |
-| api/skilessons/{id}                                   | DELETE | Delete a ski lesson.                                                        |
-| api/skilessons/{lessonId}/instructors/{instructorId}	 | PUT    | Add an existing instructor to an existing ski lesson.                       |
-| api/skilessons/populate	                              | POST   | Populate the database with ski lessons and instructors.                     |
-| api/skilessons/fetch/{level}	                         | GET    | Fetches lessons from an external API for a given level                      |
-| api/skilessons/fetch/duration/{level}	                | GET    | Gets the total duration of instructions for a ski lesson with a given level |
+| Endpoint                                              | Method | Description                                                                  |
+|:------------------------------------------------------|:-------|:-----------------------------------------------------------------------------|
+| api/skilessons                                        | GET    | Get all ski lessons.                                                         |
+| api/skilessons/{id}                                   | GET    | Get a ski lesson by its ID.                                                  |
+| api/skilessons                                        | POST   | Create a new ski lesson. Add instructor later.                               |
+| api/skilessons/{id}                                   | PUT    | Update information about a ski lesson.                                       |
+| api/skilessons/{id}                                   | DELETE | Delete a ski lesson.                                                         |
+| api/skilessons/{lessonId}/instructors/{instructorId}	 | PUT    | Add an existing instructor to an existing ski lesson.                        |
+| api/skilessons/populate                               | POST   | Populate the database with ski lessons and instructors.                      |
+| api/skilessons/fetch/{level}	                         | GET    | Fetches lessons from an external API for a given level.                      |
+| api/skilessons/fetch/duration/{level}                 | GET    | Gets the total duration of instructions for a ski lesson with a given level. |
+| api/skilessons/level/{level}	                         | GET    | Gets a list of lessons with a given level.                                   |
+| api/skilessons//instructors/{instructorId}/sum        | GET    | Gets the total price of lessons for an instructor with a given ID.           |
 
 # HTTP responses
 
@@ -88,6 +90,12 @@ To run this project first create a resources folder in the src/main/java directo
 
 **api/skilessons/fetch/duration/BEGINNER (GET)**
 - Returns a message with the total duration in minutes for instruction of lessons with a given level of BEGINNER.
+
+**api/skilessons/level/ADVANCED (GET)**
+- Returns a list of lessons with a level of ADVANCED.
+
+**api/skilessons/instructors/1/sum (GET)**
+- Returns a message with the total price of lessons for an instructor with ID 1.
 
 # Theoretical questions
 **3.3.5** : Why do we suggest a PUT method for adding an instructor to a ski lesson instead of a POST method? 

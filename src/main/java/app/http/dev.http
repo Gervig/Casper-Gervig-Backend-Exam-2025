@@ -84,3 +84,11 @@ Content-Type: application/json
 ### Gets the total duration of instructions for a ski lesson with a level of BEGINNER
 GET http://localhost:7070/api/skilessons/fetch/duration/BEGINNER
 Content-Type: application/json
+
+### Gets lessons with level of ADVANCED from our own database
+GET http://localhost:7070/api/skilessons/level/ADVANCED
+Content-Type: application/json
+
+### Gets the total sum for lessons for a instructor with ID 1
+GET http://localhost:7070/api/skilessons/instructors/1/sum
+Content-Type: application/json
