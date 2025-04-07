@@ -2,7 +2,7 @@
 CPH-business email : cph-cg201@cphbusiness.dk
 
 # Purpose
-
+Backend system for an e-commerce platform offering ski instructor services. The platform should manage ski instructor details, and the ski lessons that they lead. This system will include managing instructor profiles, their lesson schedules, and client bookings.
 
 # Setup
 
@@ -24,9 +24,15 @@ To run this project first create a resources folder in the src/main/java directo
 
 # App Endpoint Table
 
-| Endpoints | Method | Description |
-|:----------|:-------|:------------|
-| api/      |        |             |
+| Endpoint                                              | Method | Description                                              |
+|:------------------------------------------------------|:-------|:---------------------------------------------------------|
+| api/skilessons                                        | GET    | Get all ski lessons.                                     |
+| api/skilessons/{id}                                   | GET    | Get a ski lesson by its id.                              |
+| api/skilessons                                        | POST   | Create a new ski lesson. Add instructor later.           |
+| api/skilessons/{id}                                   | PUT    | Update information about a ski lesson.                   |
+| api/skilessons/{id}                                   | DELETE | Delete a ski lesson.                                     |
+| api/skilessons/{lessonId}/instructors/{instructorId}	 | PUT    | Add an existing instructor to an existing ski lesson.    |
+| api/skilessons/populate	                              | PUT    | Populate the database with ski lessons and instructors.  |
 
 # Theoretical questions
 **num** : question 
@@ -34,11 +40,11 @@ To run this project first create a resources folder in the src/main/java directo
 
 # Security Endpoint Table
 
-| Endpoints                         | Method | Secured      | Description                     |
-|:----------------------------------|:-------|:------------:|:--------------------------------|
-| api/auth/register                 | POST   | ❌          | Create a new user               |
-| api/auth/login                    | POST   | ❌          | Auth a user, return JWT token   |
-| api/secured/demo                  | GET    | ✅          | Tests a users token after login |
+| Endpoint                         | Method | Secured      | Description                     |
+|:---------------------------------|:-------|:------------:|:--------------------------------|
+| api/auth/register                | POST   | ❌          | Create a new user               |
+| api/auth/login                   | POST   | ❌          | Auth a user, return JWT token   |
+| api/secured/demo                 | GET    | ✅          | Tests a users token after login |
 
 ❌ = Not secured
 
