@@ -81,7 +81,38 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
             throw new ApiException(404, "Lesson not found");
         }
 
-        if(lessonDTO.getStarttime() != null) existingLesson.
+        //TODO figure out a cleaner way to do this
+
+        // ensures no null values
+        if(lessonDTO.getStarttime() != null) existingLesson.setStarttime(lessonDTO.getStarttime());
+        if(lessonDTO.getEndtime() != null) existingLesson.setEndtime(lessonDTO.getEndtime());
+        if(lessonDTO.getLongitude() != 0.0d) existingLesson.setLongitude(lessonDTO.getLongitude());
+        if(lessonDTO.getLatitude() != 0.0d) existingLesson.setLatitude(lessonDTO.getLatitude());
+        if(lessonDTO.getName() != null) existingLesson.setName(lessonDTO.getName());
+        if(lessonDTO.getPrice() != null) existingLesson.setPrice(lessonDTO.getPrice());
+        if(lessonDTO.getLevel() != null) existingLesson.setLevel(lessonDTO.getLevel());
+        if(lessonDTO.getInstructor() != null)
+        {
+            // tries to find the instructor
+            Instructor existingInstructor = instructorDAO.read(lessonDTO.getInstructor().getId());
+            if(existingInstructor == null)
+            {
+                // if it's a new instructor, creates them
+                Instructor newInstructor = lessonDTO.getInstructor().toEntity();
+                newInstructor = instructorDAO.create(newInstructor);
+                // sets newly persisted instructor to lesson
+                existingLesson.setInstructor(newInstructor);
+            } else
+            {
+                // if instructor already exists, sets them to the lesson
+                existingLesson.setInstructor(existingInstructor);
+            }
+        }
+
+        // updates the lesson
+        SkiLesson updatedLesson = skiLessonDAO.update(existingLesson);
+        SkiLessonDTO updatedLessonDTO = new SkiLessonDTO(updatedLesson, true);
+        return updatedLessonDTO;
     }
 
     @Override
