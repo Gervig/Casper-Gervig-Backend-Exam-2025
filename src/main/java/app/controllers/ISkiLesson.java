@@ -9,6 +9,5 @@ public interface ISkiLesson<T, I>
     T createLesson(T lesson);
     T updateLesson(T lesson);
     void deleteLesson(I id);
-    void addInstructor(I lessonId, I instructorId);
-    void removeLesson(T lesson);
+    T addInstructor(I lessonId, I instructorId);
 }

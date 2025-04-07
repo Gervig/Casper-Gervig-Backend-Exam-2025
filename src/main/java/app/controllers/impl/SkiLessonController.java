@@ -118,18 +118,14 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
     @Override
     public void deleteLesson(Long id) throws ApiException
     {
-
+        skiLessonDAO.delete(id);
     }
 
     @Override
-    public void addInstructor(Long lessonId, Long instructorId) throws ApiException
+    public SkiLessonDTO addInstructor(Long lessonId, Long instructorId) throws ApiException
     {
-
-    }
-
-    @Override
-    public void removeLesson(SkiLessonDTO lesson) throws ApiException
-    {
-
+        SkiLesson lesson = skiLessonDAO.addInstructorToSkiLesson(lessonId, instructorId);
+        SkiLessonDTO lessonDTO = new SkiLessonDTO(lesson, true);
+        return lessonDTO;
     }
 }

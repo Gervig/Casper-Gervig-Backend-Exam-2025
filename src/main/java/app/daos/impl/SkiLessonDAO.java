@@ -11,7 +11,7 @@ import jakarta.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.Set;
 
-public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructorDAO<Long>
+public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructorDAO<SkiLesson, Long>
 {
     private static EntityManagerFactory emf;
     private static SkiLessonDAO instance;
@@ -103,7 +103,7 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
     }
 
     @Override
-    public void addInstructorToSkiLesson(Long lessonId, Long instructorId)
+    public SkiLesson addInstructorToSkiLesson(Long lessonId, Long instructorId)
     {
         try (EntityManager em = emf.createEntityManager())
         {
@@ -126,8 +126,9 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
             skiLesson.setInstructor(instructor);
 
             // updates the lesson and instructor
-            skiLessonDAO.update(skiLesson);
             instructorDAO.update(instructor);
+            SkiLesson updatedLesson = skiLessonDAO.update(skiLesson);
+            return updatedLesson;
         } catch (NullPointerException npe)
         {
             throw new ApiException(404, "Could not find instructor or Ski lesson", npe);
