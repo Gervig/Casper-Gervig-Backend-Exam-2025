@@ -102,6 +102,25 @@ public class Routes
                         ctx.status(404).json(error);
                     }
                 });
+                delete("/{id}", ctx ->
+                {
+                    Long id = Long.valueOf(ctx.pathParam("id"));
+                    try
+                    {
+                        // checks if the lesson exists
+                        SkiLessonDTO test = skiLessonController.getLessonById(id);
+                        if (test == null)
+                        {
+                            throw new NullPointerException();
+                        }
+                        skiLessonController.deleteLesson(id);
+                        ctx.status(204);
+                    } catch (Exception e)
+                    {
+                        ErrorMessage error = new ErrorMessage("No lesson with that ID");
+                        ctx.status(404).json(error);
+                    }
+                });
                 post("/populate", ctx ->
                 {
                     skiLessonController.populate();

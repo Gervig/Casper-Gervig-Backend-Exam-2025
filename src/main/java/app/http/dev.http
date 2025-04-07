@@ -45,10 +45,26 @@ Content-Type: application/json
   "instructor": null
 }
 
-### Update a lesson
+### Update a lesson (This will succeed 200)
 PUT http://localhost:7070/api/skilessons/1
 Content-Type: application/json
 
 {
   "price": 780.00
 }
+
+### Update a lesson (This will fail 404)
+PUT http://localhost:7070/api/skilessons/42
+Content-Type: application/json
+
+{
+  "price": 780.00
+}
+
+### Delete a lesson (This will succeed 204)
+DELETE http://localhost:7070/api/skilessons/1
+Content-Type: application/json
+
+### Delete a lesson (This will fail 404)
+DELETE http://localhost:7070/api/skilessons/42
+Content-Type: application/json
