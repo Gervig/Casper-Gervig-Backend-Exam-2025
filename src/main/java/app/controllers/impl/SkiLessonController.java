@@ -4,6 +4,7 @@ import app.controllers.ISkiLesson;
 import app.daos.impl.InstructorDAO;
 import app.daos.impl.SkiLessonDAO;
 import app.dtos.SkiLessonDTO;
+import app.entities.Instructor;
 import app.entities.SkiLesson;
 import app.exceptions.ApiException;
 import jakarta.persistence.EntityManagerFactory;
@@ -51,6 +52,24 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
     public SkiLessonDTO createLesson(SkiLessonDTO lessonDTO) throws ApiException
     {
         SkiLesson lesson = lessonDTO.toEntity();
+        Instructor instructor = lesson.getInstructor();
+
+        // checks if the lesson has an instructor and if it's already been created
+        if(instructor != null && instructor.getId() == null)
+        {
+            // creates the instructor and the lesson
+            instructor = instructorDAO.create(instructor);
+        }
+
+        // checks if the lesson has already been created
+        if(lessonDTO.getId() == null && instructor == null)
+        {
+            lesson = skiLessonDAO.create(lesson);
+        }
+
+        // creates a lesson DTO from the lesson entity
+        SkiLessonDTO newLessonDTO = new SkiLessonDTO(lesson, true);
+        return newLessonDTO;
     }
 
     @Override
