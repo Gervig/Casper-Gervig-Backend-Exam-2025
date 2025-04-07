@@ -1,0 +1,3 @@
+### Shows all the lessons
+GET http://localhost:7070/api/skilessons
+Content-Type: application/json

@@ -1,6 +1,8 @@
 package app.rest;
 
+import app.controllers.impl.SkiLessonController;
 import app.dtos.ErrorMessage;
+import app.dtos.SkiLessonDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.apibuilder.EndpointGroup;
 import jakarta.persistence.EntityManagerFactory;
@@ -20,14 +22,15 @@ public class Routes
 
     public static EndpointGroup getRoutes(EntityManagerFactory emf)
     {
-        // instantiate controllers with emf here
+        SkiLessonController skiLessonController = new SkiLessonController(emf);
 
         return () -> {
             path("skilessons", () -> //
             {
                 get("/",ctx -> { // write get path here
-                    // write get logic here
-                    ctx.json("test");
+                    logger.info("Information about the resource that was accessed: " + ctx.path());
+                    List<SkiLessonDTO> lessonDTOS = skiLessonController.getAllLessons();
+                    ctx.json(lessonDTOS);
                 });
                 // write other http methods here
             });

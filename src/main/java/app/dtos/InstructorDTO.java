@@ -26,7 +26,7 @@ public class InstructorDTO
 
     @ToString.Exclude //avoids infinite to.String recursion
     @JsonIgnore // avoids stackoverflow when creating JSON
-    private Set<SkiLessonDTO> lessons;
+    private Set<SkiLessonDTO> lessons = new HashSet<>();
 
     public InstructorDTO(Instructor instructor, boolean includeDetails)
     {
