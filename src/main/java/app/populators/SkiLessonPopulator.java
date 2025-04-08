@@ -14,7 +14,6 @@ public class SkiLessonPopulator
 {
     public static List<SkiLesson> populate()
     {
-        List<SkiLesson> lessons = new ArrayList<>();
         List<Instructor> instructors = InstructorPopulator.populate();
         List<Location> locations = LocationPopulator.populate();
 
@@ -25,15 +24,9 @@ public class SkiLessonPopulator
                 .name("Whistler Blackcomb, Canada")
                 .price(BigDecimal.valueOf(500.00))
                 .level(Level.BEGINNER)
+                .instructor(instructors.get(0))
+                .location(locations.get(0))
                 .build();
-
-        instructors.get(0).getLessons().add(s1);
-        s1.setInstructor(instructors.get(0));
-
-        locations.get(0).getLessons().add(s1);
-        s1.setLocation(locations.get(0));
-
-        lessons.add(s1);
 
         SkiLesson s2 = SkiLesson.builder()
                 .starttime(LocalDateTime.now())
@@ -42,15 +35,9 @@ public class SkiLessonPopulator
                 .name("Chamonix, France")
                 .price(BigDecimal.valueOf(750.00))
                 .level(Level.INTERMEDIATE)
+                .instructor(instructors.get(0))
+                .location(locations.get(1))
                 .build();
-
-        instructors.get(0).getLessons().add(s2);
-        s2.setInstructor(instructors.get(0));
-
-        locations.get(1).getLessons().add(s2);
-        s2.setLocation(locations.get(1));
-
-        lessons.add(s2);
 
         SkiLesson s3 = SkiLesson.builder()
                 .starttime(LocalDateTime.now())
@@ -59,17 +46,10 @@ public class SkiLessonPopulator
                 .name("Niseko, Japan")
                 .price(BigDecimal.valueOf(1250.00))
                 .level(Level.ADVANCED)
+                .instructor(instructors.get(1))
+                .location(locations.get(2))
                 .build();
 
-        instructors.get(1).getLessons().add(s3);
-        s3.setInstructor(instructors.get(1));
-
-        locations.get(2).getLessons().add(s3);
-        s3.setLocation(locations.get(2));
-
-        lessons.add(s3);
-
-        // this lesson will not have an instructor
         SkiLesson s4 = SkiLesson.builder()
                 .starttime(LocalDateTime.now())
                 .endtime(LocalDateTime.now().plusHours(5))
@@ -77,13 +57,10 @@ public class SkiLessonPopulator
                 .name("Zermatt, Switzerland")
                 .price(BigDecimal.valueOf(1120.50))
                 .level(Level.ADVANCED)
+                .location(locations.get(3))
                 .build();
 
-        locations.get(3).getLessons().add(s4);
-        s4.setLocation(locations.get(3));
-
-        lessons.add(s4);
-
+        List<SkiLesson> lessons = new ArrayList<>(List.of(s1, s2, s3, s4));
         return lessons;
     }
 }

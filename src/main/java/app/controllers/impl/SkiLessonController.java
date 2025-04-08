@@ -158,12 +158,13 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
         List<SkiLesson> lessons = SkiLessonPopulator.populate();
         List<Instructor> instructors = InstructorPopulator.populate();
 
-        // persists the lessons with locations and instructors
+        // Persist all lessons (cascades location & instructor)
         lessons.forEach(skiLessonDAO::create);
 
-        // persists the instructor with no lesson
+
         instructorDAO.create(instructors.get(2));
     }
+
 
     public List<SkiLessonDTO> fetchFromAPI(Level level)
     {
