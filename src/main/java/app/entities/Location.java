@@ -23,4 +23,10 @@ public class Location
 
     @OneToMany(mappedBy = "location", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<SkiLesson> lessons;
+
+    public void addLesson(SkiLesson lesson)
+    {
+        this.lessons.add(lesson);
+        lesson.setLocation(this);
+    }
 }

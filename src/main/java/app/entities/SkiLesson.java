@@ -26,10 +26,6 @@ public class SkiLesson
     @Setter
     private LocalDateTime endtime;
     @Setter
-    private double longitude;
-    @Setter
-    private double latitude;
-    @Setter
     private String name;
     @Setter
     private BigDecimal price;

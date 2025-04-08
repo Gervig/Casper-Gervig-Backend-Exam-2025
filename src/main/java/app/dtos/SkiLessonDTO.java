@@ -20,12 +20,12 @@ public class SkiLessonDTO
     private Long id;
     private LocalDateTime starttime;
     private LocalDateTime endtime;
-    private double longitude;
-    private double latitude;
     private String name;
     private BigDecimal price;
     private Level level;
     private int durationMinutes;
+
+    private LocationDTO location;
 
     private InstructorDTO instructor;
 
@@ -34,8 +34,6 @@ public class SkiLessonDTO
         this.id = skiLesson.getId();
         this.starttime = skiLesson.getStarttime();
         this.endtime = skiLesson.getEndtime();
-        this.longitude = skiLesson.getLongitude();
-        this.latitude = skiLesson.getLatitude();
         this.name = skiLesson.getName();
         this.price = skiLesson.getPrice();
         this.level = skiLesson.getLevel();
@@ -46,6 +44,12 @@ public class SkiLessonDTO
             this.instructor.getLessons().add(this);
         }
 
+        if(includeDetails && skiLesson.getLocation() != null)
+        {
+            this.location = new LocationDTO(skiLesson.getLocation(), false);
+            this.location.getLessons().add(this);
+        }
+
     }
 
     public SkiLesson toEntity()
@@ -54,8 +58,6 @@ public class SkiLessonDTO
                 .id(this.id)
                 .starttime(this.starttime)
                 .endtime(this.endtime)
-                .longitude(this.longitude)
-                .latitude(this.latitude)
                 .name(this.name)
                 .price(this.price)
                 .level(this.level)
