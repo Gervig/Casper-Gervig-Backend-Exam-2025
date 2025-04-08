@@ -28,7 +28,6 @@ public class SkiLessonDTO
 
     private LocationDTO location;
 
-    @JsonIgnore
     private InstructorDTO instructor;
 
     public SkiLessonDTO(SkiLesson skiLesson, boolean includeDetails)

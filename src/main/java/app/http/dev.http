@@ -37,11 +37,11 @@ Content-Type: application/json
     52,
     385537000
   ],
-  "longitude": 46.5405,
-  "latitude": 12.1357,
   "name": "Cortina d'Ampezzo, Italy",
   "price": 425.00,
   "level": "BEGINNER",
+  "location": null,
+  "durationMinutes": 0,
   "instructor": null
 }
 
