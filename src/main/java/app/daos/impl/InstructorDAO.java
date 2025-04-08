@@ -73,7 +73,7 @@ public class InstructorDAO implements IDAO<Instructor, Long>
             return updatedInstructor;
         } catch (Exception e)
         {
-            throw new ApiException(401, "Error updating guide", e);
+            throw new ApiException(401, "Error updating instructor", e);
         }
     }
 
