@@ -12,11 +12,8 @@ import java.util.List;
 
 public class SkiLessonPopulator
 {
-    public static List<SkiLesson> populate()
+    public static List<SkiLesson> populate(List<Instructor> instructors, List<Location> locations)
     {
-        List<Instructor> instructors = InstructorPopulator.populate();
-        List<Location> locations = LocationPopulator.populate();
-
         SkiLesson s1 = SkiLesson.builder()
                 .starttime(LocalDateTime.now())
                 .endtime(LocalDateTime.now().plusHours(4))
