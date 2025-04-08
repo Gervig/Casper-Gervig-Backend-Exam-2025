@@ -1,6 +1,7 @@
 package app.config;
 
 import app.entities.Instructor;
+import app.entities.Location;
 import app.entities.SkiLesson;
 import app.security.entities.Role;
 import app.security.entities.User;
@@ -55,6 +56,7 @@ public class HibernateConfig
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Instructor.class);
         configuration.addAnnotatedClass(SkiLesson.class);
+        configuration.addAnnotatedClass(Location.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest)
