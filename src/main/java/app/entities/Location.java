@@ -18,8 +18,8 @@ public class Location
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double longitude;
     private double latitude;
+    private double longitude;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Set<SkiLesson> lessons;

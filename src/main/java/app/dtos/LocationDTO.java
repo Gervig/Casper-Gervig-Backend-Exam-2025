@@ -18,9 +18,9 @@ import java.util.stream.Collectors;
 public class LocationDTO
 {
     private Long id;
-    private double longitude;
     private double latitude;
 
+    private double longitude;
     @ToString.Exclude
     @JsonIgnore
     private Set<SkiLessonDTO> lessons = new HashSet<>();
@@ -28,9 +28,9 @@ public class LocationDTO
     public LocationDTO(Location location, boolean includeDetails)
     {
         this.id = location.getId();
-        this.longitude = location.getLongitude();
         this.latitude = location.getLatitude();
 
+        this.longitude = location.getLongitude();
         if(includeDetails && !location.getLessons().isEmpty())
         {
             this.lessons = location.getLessons()
@@ -44,8 +44,8 @@ public class LocationDTO
     {
         Location location = Location.builder()
                 .id(this.id)
-                .longitude(this.longitude)
                 .latitude(this.latitude)
+                .longitude(this.longitude)
                 .lessons(new HashSet<>())
                 .build();
 

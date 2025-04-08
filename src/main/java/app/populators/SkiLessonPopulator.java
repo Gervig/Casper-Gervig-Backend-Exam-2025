@@ -1,6 +1,7 @@
 package app.populators;
 
 import app.entities.Instructor;
+import app.entities.Location;
 import app.entities.SkiLesson;
 import app.enums.Level;
 
@@ -14,13 +15,12 @@ public class SkiLessonPopulator
     public static List<SkiLesson> populate()
     {
         List<SkiLesson> lessons = new ArrayList<>();
+        List<Location> locations = LocationPopulator.populate();
 
         SkiLesson s1 = SkiLesson.builder()
                 .starttime(LocalDateTime.now())
                 .endtime(LocalDateTime.now().plusHours(4))
                 .durationMinutes(240)
-                .longitude(50.1150D)
-                .latitude(122.9500D)
                 .name("Whistler Blackcomb, Canada")
                 .price(BigDecimal.valueOf(500.00))
                 .level(Level.BEGINNER)
@@ -31,8 +31,6 @@ public class SkiLessonPopulator
                 .starttime(LocalDateTime.now())
                 .endtime(LocalDateTime.now().plusHours(2))
                 .durationMinutes(120)
-                .longitude(45.9237D)
-                .latitude(6.8694D)
                 .name("Chamonix, France")
                 .price(BigDecimal.valueOf(750.00))
                 .level(Level.INTERMEDIATE)
@@ -43,8 +41,6 @@ public class SkiLessonPopulator
                 .starttime(LocalDateTime.now())
                 .endtime(LocalDateTime.now().plusHours(5))
                 .durationMinutes(300)
-                .longitude(42.8048D)
-                .latitude(140.6874D)
                 .name("Niseko, Japan")
                 .price(BigDecimal.valueOf(1250.00))
                 .level(Level.ADVANCED)
@@ -56,8 +52,6 @@ public class SkiLessonPopulator
                 .starttime(LocalDateTime.now())
                 .endtime(LocalDateTime.now().plusHours(5))
                 .durationMinutes(300)
-                .longitude(46.0207D)
-                .latitude(7.7491D)
                 .name("Zermatt, Switzerland")
                 .price(BigDecimal.valueOf(1120.50))
                 .level(Level.ADVANCED)
