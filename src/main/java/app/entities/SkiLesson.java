@@ -47,5 +47,5 @@ public class SkiLesson
     @JoinColumn(name = "location_id")
     @Setter
     private Location location;
-    
+
 }
