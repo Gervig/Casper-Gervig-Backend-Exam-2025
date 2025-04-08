@@ -13,6 +13,7 @@ import java.util.Set;
 @Builder
 @ToString
 @Entity
+//TODO Add unique constraint on the same coordinates
 public class Location
 {
     @Id

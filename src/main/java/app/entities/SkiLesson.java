@@ -39,7 +39,7 @@ public class SkiLesson
     @Setter
     private Instructor instructor;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "location_id")
     @Setter
     private Location location;
