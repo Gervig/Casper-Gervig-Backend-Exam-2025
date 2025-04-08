@@ -35,9 +35,10 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
         {
             em.getTransaction().begin();
 
-            // Ensure entities are merged before persisting SkiLesson
+            // Ensure that the instructor is either persisted or fetched
             if (skiLesson.getInstructor() != null) {
-                skiLesson.setInstructor(em.merge(skiLesson.getInstructor()));  // Merge instructor if it exists
+                Instructor instructor = instructorDAO.create(skiLesson.getInstructor());
+                skiLesson.setInstructor(instructor);
             }
             if (skiLesson.getLocation() != null) {
                 skiLesson.setLocation(em.merge(skiLesson.getLocation()));  // Merge location if it exists

@@ -14,6 +14,9 @@ import java.util.Set;
 @Builder
 @ToString
 @Entity
+@Table(name= "instructor", uniqueConstraints = {
+        @UniqueConstraint(name = "unique_firstname_lastname_email", columnNames = {"firstname", "lastname", "email"})
+})
 public class Instructor
 {
     @Id

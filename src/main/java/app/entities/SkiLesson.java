@@ -34,7 +34,7 @@ public class SkiLesson
     @Setter
     private int durationMinutes;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "instructor_id")
     @Setter
     private Instructor instructor;

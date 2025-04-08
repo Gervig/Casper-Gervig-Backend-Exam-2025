@@ -5,6 +5,9 @@ import app.entities.Instructor;
 import app.exceptions.ApiException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.PersistenceException;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
 
@@ -29,12 +32,53 @@ public class InstructorDAO implements IDAO<Instructor, Long>
         try (EntityManager em = emf.createEntityManager())
         {
             em.getTransaction().begin();
-            em.persist(instructor);
+
+            // Check if the instructor has an ID (i.e., if it already exists)
+            if (instructor.getId() != null)
+            {
+                // The instructor already exists, no need to persist, just merge
+                em.merge(instructor); // Ensure we're merging the existing one
+            } else
+            {
+                // Attempt to persist the new instructor
+                try
+                {
+                    em.persist(instructor); // Try to persist the new instructor
+                } catch (PersistenceException pe)
+                {
+                    if (pe.getCause() instanceof ConstraintViolationException)
+                    {
+                        // If there's a unique constraint violation, fetch the existing instructor
+                        em.getTransaction().rollback();
+                        return findExistingInstructor(em, instructor);
+                    } else
+                    {
+                        throw pe; // Rethrow if the exception is not a unique constraint violation
+                    }
+                }
+            }
             em.getTransaction().commit();
             return instructor;
         } catch (Exception e)
         {
-            throw new ApiException(401, "Error creating instructor", e);
+            throw new ApiException(401, "Error creating or fetching instructor", e);
+        }
+    }
+
+    private Instructor findExistingInstructor(EntityManager em, Instructor instructor)
+    {
+        try
+        {
+            return em.createQuery(
+                            "SELECT i FROM Instructor i WHERE i.firstname = :firstname AND i.lastname = :lastname AND i.email = :email",
+                            Instructor.class)
+                    .setParameter("firstname", instructor.getFirstname())
+                    .setParameter("lastname", instructor.getLastname())
+                    .setParameter("email", instructor.getEmail())
+                    .getSingleResult();
+        } catch (NoResultException e)
+        {
+            throw new ApiException(500, "Instructor exists but could not be retrieved", e);
         }
     }
 
