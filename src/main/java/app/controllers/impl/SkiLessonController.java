@@ -163,7 +163,6 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
 
         // persists the instructor with no lesson
         instructorDAO.create(instructors.get(2));
-
     }
 
     public List<SkiLessonDTO> fetchFromAPI(Level level)
