@@ -3,6 +3,7 @@ package app.dtos;
 import app.entities.Instructor;
 import app.entities.SkiLesson;
 import app.enums.Level;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -27,6 +28,7 @@ public class SkiLessonDTO
 
     private LocationDTO location;
 
+    @JsonIgnore
     private InstructorDTO instructor;
 
     public SkiLessonDTO(SkiLesson skiLesson, boolean includeDetails)
@@ -41,13 +43,13 @@ public class SkiLessonDTO
         if (includeDetails && skiLesson.getInstructor() != null)
         {
             this.instructor = new InstructorDTO(skiLesson.getInstructor(), false);
-            this.instructor.getLessons().add(this);
+//            this.instructor.getLessons().add(this); //TODO remove this if not needed
         }
 
         if(includeDetails && skiLesson.getLocation() != null)
         {
             this.location = new LocationDTO(skiLesson.getLocation(), false);
-            this.location.getLessons().add(this);
+//            this.location.getLessons().add(this); //TODO remove this if not needed
         }
 
     }

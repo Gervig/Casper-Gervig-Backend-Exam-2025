@@ -19,8 +19,8 @@ public class LocationDTO
 {
     private Long id;
     private double latitude;
-
     private double longitude;
+
     @ToString.Exclude
     @JsonIgnore
     private Set<SkiLessonDTO> lessons = new HashSet<>();
@@ -29,8 +29,8 @@ public class LocationDTO
     {
         this.id = location.getId();
         this.latitude = location.getLatitude();
-
         this.longitude = location.getLongitude();
+
         if(includeDetails && !location.getLessons().isEmpty())
         {
             this.lessons = location.getLessons()
