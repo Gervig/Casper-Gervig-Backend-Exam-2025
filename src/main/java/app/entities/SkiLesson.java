@@ -34,12 +34,12 @@ public class SkiLesson
     @Setter
     private int durationMinutes;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "instructor_id")
     @Setter
     private Instructor instructor;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "location_id")
     @Setter
     private Location location;

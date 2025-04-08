@@ -25,9 +25,7 @@ public class Instructor
     private int phone;
     private int yearsOfExperience;
 
-    // FetchType.EAGER, when an instructor is fetched so is their lessons
-    // CascadeType.PERSIST, when an instructor is persisted so is their lessons
-    @OneToMany(mappedBy = "instructor", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "instructor")
     @ToString.Exclude
     private Set<SkiLesson> lessons = new HashSet<>(); // instantiates it so that the set is never null, but just empty
 

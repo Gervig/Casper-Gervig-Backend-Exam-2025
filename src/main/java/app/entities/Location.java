@@ -21,7 +21,8 @@ public class Location
     private double latitude;
     private double longitude;
 
-    @OneToMany(mappedBy = "location", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "location")
+    @ToString.Exclude
     private Set<SkiLesson> lessons;
 
     public void addLesson(SkiLesson lesson)

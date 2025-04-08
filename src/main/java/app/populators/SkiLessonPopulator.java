@@ -15,6 +15,7 @@ public class SkiLessonPopulator
     public static List<SkiLesson> populate()
     {
         List<SkiLesson> lessons = new ArrayList<>();
+        List<Instructor> instructors = InstructorPopulator.populate();
         List<Location> locations = LocationPopulator.populate();
 
         SkiLesson s1 = SkiLesson.builder()
@@ -25,6 +26,13 @@ public class SkiLessonPopulator
                 .price(BigDecimal.valueOf(500.00))
                 .level(Level.BEGINNER)
                 .build();
+
+        instructors.get(0).getLessons().add(s1);
+        s1.setInstructor(instructors.get(0));
+
+        locations.get(0).getLessons().add(s1);
+        s1.setLocation(locations.get(0));
+
         lessons.add(s1);
 
         SkiLesson s2 = SkiLesson.builder()
@@ -35,6 +43,13 @@ public class SkiLessonPopulator
                 .price(BigDecimal.valueOf(750.00))
                 .level(Level.INTERMEDIATE)
                 .build();
+
+        instructors.get(0).getLessons().add(s2);
+        s2.setInstructor(instructors.get(0));
+
+        locations.get(1).getLessons().add(s2);
+        s2.setLocation(locations.get(1));
+
         lessons.add(s2);
 
         SkiLesson s3 = SkiLesson.builder()
@@ -45,6 +60,13 @@ public class SkiLessonPopulator
                 .price(BigDecimal.valueOf(1250.00))
                 .level(Level.ADVANCED)
                 .build();
+
+        instructors.get(1).getLessons().add(s3);
+        s3.setInstructor(instructors.get(1));
+
+        locations.get(2).getLessons().add(s3);
+        s3.setLocation(locations.get(2));
+
         lessons.add(s3);
 
         // this lesson will not have an instructor
@@ -56,6 +78,10 @@ public class SkiLessonPopulator
                 .price(BigDecimal.valueOf(1120.50))
                 .level(Level.ADVANCED)
                 .build();
+
+        locations.get(3).getLessons().add(s4);
+        s4.setLocation(locations.get(3));
+
         lessons.add(s4);
 
         return lessons;

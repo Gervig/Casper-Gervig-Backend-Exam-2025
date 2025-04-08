@@ -11,6 +11,7 @@ import app.entities.SkiLesson;
 import app.enums.Level;
 import app.exceptions.ApiException;
 import app.populators.InstructorPopulator;
+import app.populators.LocationPopulator;
 import app.populators.SkiLessonPopulator;
 import app.services.SkiLessonService;
 import jakarta.persistence.EntityManager;
@@ -154,18 +155,18 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
 
     public void populate()
     {
-        try(EntityManager em = emf.createEntityManager())
-        {
-            // fetches the lessons and instructors from populators
-            List<SkiLesson> lessons = SkiLessonPopulator.populate();
-            List<Instructor> instructors = InstructorPopulator.populate();
+        // Create lessons once
+        List<SkiLesson> lessons = SkiLessonPopulator.populate();
 
-            // persists all the instructors and their lessons
-            instructors.forEach(instructorDAO::create);
+        // Pass them into the location and instructor populators
+        List<Location> locations = LocationPopulator.populate();
+        List<Instructor> instructors = InstructorPopulator.populate();
 
-            // persists the last lesson with no instructor
-            skiLessonDAO.create(lessons.get(3));
-        }
+        // Persist instructors
+        instructors.forEach(instructorDAO::create);
+
+        // Persist locations (cascades their lessons)
+        locations.forEach(locationDAO::create);
     }
 
     public List<SkiLessonDTO> fetchFromAPI(Level level)
