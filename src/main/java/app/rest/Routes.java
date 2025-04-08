@@ -4,7 +4,6 @@ import app.controllers.impl.SkiLessonController;
 import app.dtos.ErrorMessage;
 import app.dtos.SkiLessonDTO;
 import app.enums.Level;
-import app.services.SkiLessonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.apibuilder.EndpointGroup;
 import jakarta.persistence.EntityManagerFactory;
@@ -142,13 +141,13 @@ public class Routes
                 get("/fetch/{level}", ctx ->
                 {
                     Level level = Level.valueOf(ctx.pathParam("{level}"));
-                    List<SkiLessonDTO> lessonDTOS = SkiLessonService.getLessons(level);
+                    List<SkiLessonDTO> lessonDTOS = skiLessonController.fetchFromAPI(level);
                     ctx.json(lessonDTOS);
                 });
                 get("fetch/duration/{level}", ctx ->
                 {
                     Level level = Level.valueOf(ctx.pathParam("{level}"));
-                    List<SkiLessonDTO> lessonDTOS = SkiLessonService.getLessons(level);
+                    List<SkiLessonDTO> lessonDTOS = skiLessonController.fetchFromAPI(level);
                     int totalMinutes = 0;
                     for(SkiLessonDTO l : lessonDTOS)
                     {
