@@ -2,9 +2,11 @@ package app.controllers.impl;
 
 import app.controllers.ISkiLesson;
 import app.daos.impl.InstructorDAO;
+import app.daos.impl.LocationDAO;
 import app.daos.impl.SkiLessonDAO;
 import app.dtos.SkiLessonDTO;
 import app.entities.Instructor;
+import app.entities.Location;
 import app.entities.SkiLesson;
 import app.enums.Level;
 import app.exceptions.ApiException;
@@ -23,6 +25,7 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
     private static EntityManagerFactory emf;
     private SkiLessonDAO skiLessonDAO;
     private InstructorDAO instructorDAO;
+    private LocationDAO locationDAO;
 
     // instantiates the DAOs
     public SkiLessonController(EntityManagerFactory _emf)
@@ -33,6 +36,7 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
         }
         this.skiLessonDAO = SkiLessonDAO.getInstance(emf);
         this.instructorDAO = InstructorDAO.getInstance(emf);
+        this.locationDAO = LocationDAO.getInstance(emf);
     }
 
     @Override
@@ -93,8 +97,6 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
         // ensures no null values
         if(lessonDTO.getStarttime() != null) existingLesson.setStarttime(lessonDTO.getStarttime());
         if(lessonDTO.getEndtime() != null) existingLesson.setEndtime(lessonDTO.getEndtime());
-        if(lessonDTO.getLongitude() != 0.0d) existingLesson.setLongitude(lessonDTO.getLongitude());
-        if(lessonDTO.getLatitude() != 0.0d) existingLesson.setLatitude(lessonDTO.getLatitude());
         if(lessonDTO.getName() != null) existingLesson.setName(lessonDTO.getName());
         if(lessonDTO.getPrice() != null) existingLesson.setPrice(lessonDTO.getPrice());
         if(lessonDTO.getLevel() != null) existingLesson.setLevel(lessonDTO.getLevel());
@@ -113,6 +115,20 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
             {
                 // if instructor already exists, sets them to the lesson
                 existingLesson.setInstructor(existingInstructor);
+            }
+        }
+        // same thing for location
+        if(lessonDTO.getLocation() != null)
+        {
+            Location existingLocation = locationDAO.read(lessonDTO.getLocation().getId());
+            if(existingLocation == null)
+            {
+                Location newLocation = lessonDTO.getLocation().toEntity();
+                newLocation = locationDAO.create(newLocation);
+                existingLesson.setLocation(newLocation);
+            } else
+            {
+                existingLesson.setLocation(existingLocation);
             }
         }
 
