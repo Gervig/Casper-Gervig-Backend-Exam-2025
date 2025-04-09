@@ -28,7 +28,7 @@ public class Instructor
     private int phone;
     private int yearsOfExperience;
 
-    @OneToMany(mappedBy = "instructor" , fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "instructor" , fetch = FetchType.EAGER)
     @ToString.Exclude
     private Set<SkiLesson> lessons = new HashSet<>(); // instantiates it so that the set is never null, but just empty
 
