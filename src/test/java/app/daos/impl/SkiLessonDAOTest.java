@@ -38,16 +38,6 @@ class SkiLessonDAOTest
         {
             em.getTransaction().begin();
 
-            // clears previous data
-            em.createQuery("DELETE FROM SkiLesson").executeUpdate();
-            em.createQuery("DELETE FROM Instructor").executeUpdate();
-            em.createQuery("DELETE FROM Location").executeUpdate();
-
-            // Reset ID sequences (for PostgresSQL & databases that support sequences)
-            em.createNativeQuery("ALTER SEQUENCE skilesson_id_seq RESTART WITH 1").executeUpdate();
-            em.createNativeQuery("ALTER SEQUENCE instructor_id_seq RESTART WITH 1").executeUpdate();
-            em.createNativeQuery("ALTER SEQUENCE location_id_seq RESTART WITH 1").executeUpdate();
-
             // Persist all lessons (cascades location & instructor)
             lessons.forEach(skiLessonDAO::create);
 
@@ -57,7 +47,24 @@ class SkiLessonDAOTest
             em.getTransaction().commit();
         }
     }
-    
+
+    @AfterEach
+    void tearDown()
+    {
+        try(EntityManager em = emf.createEntityManager())
+        {
+            // clears previous data
+            em.createQuery("DELETE FROM SkiLesson").executeUpdate();
+            em.createQuery("DELETE FROM Instructor").executeUpdate();
+            em.createQuery("DELETE FROM Location").executeUpdate();
+
+            // Reset ID sequences (for PostgresSQL & databases that support sequences)
+            em.createNativeQuery("ALTER SEQUENCE skilesson_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE instructor_id_seq RESTART WITH 1").executeUpdate();
+            em.createNativeQuery("ALTER SEQUENCE location_id_seq RESTART WITH 1").executeUpdate();
+        }
+    }
+
     @Test
     void getInstance()
     {
