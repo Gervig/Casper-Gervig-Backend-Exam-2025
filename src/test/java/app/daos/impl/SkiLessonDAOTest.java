@@ -7,8 +7,6 @@ import app.entities.SkiLesson;
 import app.populators.InstructorPopulator;
 import app.populators.LocationPopulator;
 import app.populators.SkiLessonPopulator;
-import app.security.daos.UserDAO;
-import app.security.entities.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +23,6 @@ class SkiLessonDAOTest
     private static final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
     private static final SkiLessonDAO skiLessonDAO = SkiLessonDAO.getInstance(emf);
     private static final InstructorDAO instructorDAO = InstructorDAO.getInstance(emf);
-    private static final LocationDAO locationDAO = LocationDAO.getInstance(emf);
     private List<SkiLesson> lessons;
     private List<Instructor> instructors;
     private List<Location> locations;
