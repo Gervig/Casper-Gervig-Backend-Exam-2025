@@ -57,29 +57,7 @@ class SkiLessonDAOTest
             em.getTransaction().commit();
         }
     }
-
-    @AfterEach
-    void tearDown()
-    {
-        try (EntityManager em = emf.createEntityManager())
-        {
-            em.getTransaction().begin();
-
-            // clears data
-            em.createQuery("DELETE FROM SkiLesson").executeUpdate();
-            em.createQuery("DELETE FROM Instructor").executeUpdate();
-            em.createQuery("DELETE FROM Location").executeUpdate();
-
-            // Reset ID sequences (for PostgresSQL & databases that support sequences)
-            em.createNativeQuery("ALTER SEQUENCE skilesson_id_seq RESTART WITH 1").executeUpdate();
-            em.createNativeQuery("ALTER SEQUENCE instructor_id_seq RESTART WITH 1").executeUpdate();
-            em.createNativeQuery("ALTER SEQUENCE location_id_seq RESTART WITH 1").executeUpdate();
-
-            em.getTransaction().commit();
-        }
-    }
-
-
+    
     @Test
     void getInstance()
     {
