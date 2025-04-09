@@ -14,11 +14,8 @@ import app.populators.InstructorPopulator;
 import app.populators.LocationPopulator;
 import app.populators.SkiLessonPopulator;
 import app.services.SkiLessonService;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
