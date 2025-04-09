@@ -89,6 +89,6 @@ Content-Type: application/json
 GET http://localhost:7070/api/skilessons/level/ADVANCED
 Content-Type: application/json
 
-### Gets the total sum for lessons for a instructor with ID 1
-GET http://localhost:7070/api/skilessons/instructors/1/sum
+### Gets the total sum for lessons for a instructor with ID 2
+GET http://localhost:7070/api/skilessons/instructors/2/sum
 Content-Type: application/json
