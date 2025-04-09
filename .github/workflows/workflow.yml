@@ -2,7 +2,7 @@
 name: CI/CD WORKFLOW
 on:
   push:
-    branches: [ deploy ]
+    branches: [ deploy ] # usually this is done on the main branch, but that is closed until exam
 
 jobs:
   build:
