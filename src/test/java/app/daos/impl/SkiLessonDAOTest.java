@@ -53,6 +53,8 @@ class SkiLessonDAOTest
     {
         try(EntityManager em = emf.createEntityManager())
         {
+            em.getTransaction().begin();
+
             // clears previous data
             em.createQuery("DELETE FROM SkiLesson").executeUpdate();
             em.createQuery("DELETE FROM Instructor").executeUpdate();
@@ -62,6 +64,8 @@ class SkiLessonDAOTest
             em.createNativeQuery("ALTER SEQUENCE skilesson_id_seq RESTART WITH 1").executeUpdate();
             em.createNativeQuery("ALTER SEQUENCE instructor_id_seq RESTART WITH 1").executeUpdate();
             em.createNativeQuery("ALTER SEQUENCE location_id_seq RESTART WITH 1").executeUpdate();
+
+            em.getTransaction().commit();
         }
     }
 
