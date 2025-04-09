@@ -13,6 +13,7 @@ import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -70,6 +71,12 @@ class SkiLessonControllerTest
         RestAssured.baseURI = "http://localhost:7777/api";
     }
 
+    @AfterEach
+    void tearDown()
+    {
+        ApplicationConfig.stopServer();
+    }
+
     @Test
     @DisplayName("Test getting all lessons")
     void getAllItems()
@@ -89,18 +96,6 @@ class SkiLessonControllerTest
 
         // double checks that the list has all 4 lessons
         assertThat(lessonDTOS.size(), is(4));
-    }
-
-    @Test
-    @DisplayName("Test getting lesson with ID 1")
-    void getLessonById()
-    {
-        given()
-                .when()
-                .get("/skilessons/1")
-                .then()
-                .statusCode(200)
-                .body("id", equalTo(1));
     }
 
     @Test
@@ -126,6 +121,18 @@ class SkiLessonControllerTest
             jpe.printStackTrace();
             fail();
         }
+    }
+
+    @Test
+    @DisplayName("Test getting lesson with ID 1")
+    void getLessonById()
+    {
+        given()
+                .when()
+                .get("/skilessons/1")
+                .then()
+                .statusCode(200)
+                .body("id", equalTo(1));
     }
 
     @Test
@@ -195,8 +202,7 @@ class SkiLessonControllerTest
         SkiLessonDTO lessonDTO = SkiLessonDTO.builder()
                 .starttime(null) //TODO fix jackson can't handle LocalDateTime for some reason
                 .endtime(null) //TODO same here
-                .longitude(111.4980)
-                .latitude(40.6461)
+                .location(null)
                 .name("Park City, Utah, USA")
                 .price(BigDecimal.valueOf(764.95))
                 .level(Level.BEGINNER)
