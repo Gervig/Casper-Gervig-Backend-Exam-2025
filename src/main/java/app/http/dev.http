@@ -1,21 +1,21 @@
 ### Populates the database
-POST http://localhost:7070/api/skilessons/populate
+POST http://localhost:7075/api/skilessons/populate
 Content-Type: application/json
 
 ### Shows all the lessons
-GET http://localhost:7070/api/skilessons
+GET http://localhost:7075/api/skilessons
 Content-Type: application/json
 
 ### Get lesson with ID 1 (This will succeed 200)
-GET http://localhost:7070/api/skilessons/1
+GET http://localhost:7075/api/skilessons/1
 Content-Type: application/json
 
 ### Get lesson with ID 42 (This will fail 404)
-GET http://localhost:7070/api/skilessons/42
+GET http://localhost:7075/api/skilessons/42
 Content-Type: application/json
 
 ### Add a new lesson
-POST http://localhost:7070/api/skilessons
+POST http://localhost:7075/api/skilessons
 Content-Type: application/json
 
 {
@@ -46,7 +46,7 @@ Content-Type: application/json
 }
 
 ### Update a lesson with ID 1 (This will succeed 200)
-PUT http://localhost:7070/api/skilessons/1
+PUT http://localhost:7075/api/skilessons/1
 Content-Type: application/json
 
 {
@@ -54,7 +54,7 @@ Content-Type: application/json
 }
 
 ### Update a lesson with ID 42 (This will fail 404)
-PUT http://localhost:7070/api/skilessons/42
+PUT http://localhost:7075/api/skilessons/42
 Content-Type: application/json
 
 {
@@ -62,33 +62,33 @@ Content-Type: application/json
 }
 
 ### Delete a lesson with ID 1 (This will succeed 204)
-DELETE http://localhost:7070/api/skilessons/1
+DELETE http://localhost:7075/api/skilessons/1
 Content-Type: application/json
 
 ### Delete a lesson with ID 42 (This will fail 404)
-DELETE http://localhost:7070/api/skilessons/42
+DELETE http://localhost:7075/api/skilessons/42
 Content-Type: application/json
 
 ### Assign an instructor with ID 3 to a lesson with ID 2 (This will succeed 200)
-PUT http://localhost:7070/api/skilessons/2/instructors/3
+PUT http://localhost:7075/api/skilessons/2/instructors/3
 Content-Type: application/json
 
 ### Assign an instructor with ID 42 to a lesson with ID 2 (This will fail 404)
-PUT http://localhost:7070/api/skilessons/2/instructors/42
+PUT http://localhost:7075/api/skilessons/2/instructors/42
 Content-Type: application/json
 
 ### Fetch lessons from external API for lesson with level BEGINNER
-GET http://localhost:7070/api/skilessons/fetch/BEGINNER
+GET http://localhost:7075/api/skilessons/fetch/BEGINNER
 Content-Type: application/json
 
 ### Gets the total duration of instructions for a ski lesson with a level of BEGINNER
-GET http://localhost:7070/api/skilessons/fetch/duration/BEGINNER
+GET http://localhost:7075/api/skilessons/fetch/duration/BEGINNER
 Content-Type: application/json
 
 ### Gets lessons with level of ADVANCED from our own database
-GET http://localhost:7070/api/skilessons/level/ADVANCED
+GET http://localhost:7075/api/skilessons/level/ADVANCED
 Content-Type: application/json
 
 ### Gets the total sum for lessons for a instructor with ID 2
-GET http://localhost:7070/api/skilessons/instructors/2/sum
+GET http://localhost:7075/api/skilessons/instructors/2/sum
 Content-Type: application/json

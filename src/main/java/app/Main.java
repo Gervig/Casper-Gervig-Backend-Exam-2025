@@ -36,7 +36,7 @@ public class Main
                 .setRoute(Routes.getRoutes(emf))
                 .setRoute(SecurityRoutes.getRoutes(emf))
                 .handleException()
-                .startServer(7070); //TODO change this to an available port for deployment
+                .startServer(7075); //TODO change this to an available port for deployment
 
     }
 
