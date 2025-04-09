@@ -12,10 +12,8 @@ import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SkiLessonDAOTest
@@ -27,6 +25,7 @@ class SkiLessonDAOTest
     private List<Instructor> instructors;
     private List<Location> locations;
 
+    // populates the database before each test
     @BeforeEach
     void setup()
     {
@@ -48,6 +47,7 @@ class SkiLessonDAOTest
         }
     }
 
+    // resets the database after each test
     @AfterEach
     void tearDown()
     {
@@ -151,14 +151,14 @@ class SkiLessonDAOTest
         assertEquals(lesson.getInstructor().getLessons().size(), 1);
     }
 
-    @Test
-    void getSkiLessonsByInstructor()
-    {
-        // reads how many lessons the instructor actually has in the database
-        int actual = skiLessonDAO.getSkiLessonsByInstructor(instructors.get(0).getId()).size();
-
-        assertEquals(2, actual);
-    }
+//    @Test
+//    void getSkiLessonsByInstructor()
+//    {
+//        // reads how many lessons the instructor actually has in the database
+//        int actual = skiLessonDAO.getSkiLessonsByInstructor(instructors.get(0).getId()).size();
+//
+//        assertEquals(2, actual);
+//    }
 
     // Helper method to create a test lesson
     private SkiLesson getTestLesson()

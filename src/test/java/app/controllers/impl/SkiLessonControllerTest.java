@@ -1,8 +1,6 @@
 package app.controllers.impl;
 
 import app.config.HibernateConfig;
-import app.daos.impl.InstructorDAO;
-import app.daos.impl.SkiLessonDAO;
 import app.dtos.SkiLessonDTO;
 import app.enums.Level;
 import app.rest.ApplicationConfig;
@@ -17,10 +15,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
 import java.util.List;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,11 +24,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
-RUN THE TESTS ONE BY ONE, THEY FAIL OTHERWISE
- */
-
-//TODO fix test so they work when run all at once
 class SkiLessonControllerTest
 {
     private ObjectMapper objectMapper = new ObjectMapper();

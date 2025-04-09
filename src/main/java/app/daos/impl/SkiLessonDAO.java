@@ -7,6 +7,7 @@ import app.entities.SkiLesson;
 import app.exceptions.ApiException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
 import java.util.Set;
@@ -36,11 +37,13 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
             em.getTransaction().begin();
 
             // Ensure that the instructor is either persisted or fetched
-            if (skiLesson.getInstructor() != null) {
+            if (skiLesson.getInstructor() != null)
+            {
                 Instructor instructor = instructorDAO.create(skiLesson.getInstructor());
                 skiLesson.setInstructor(instructor);
             }
-            if (skiLesson.getLocation() != null) {
+            if (skiLesson.getLocation() != null)
+            {
                 skiLesson.setLocation(em.merge(skiLesson.getLocation()));  // Merge location if it exists
             }
 
@@ -155,7 +158,7 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
         {
             Instructor instructor = em.find(Instructor.class, instructorId);
 
-            if(instructor == null)
+            if (instructor == null)
             {
                 throw new NullPointerException();
             }
@@ -167,8 +170,7 @@ public class SkiLessonDAO implements IDAO<SkiLesson, Long>, ISkiLessonInstructor
         } catch (NullPointerException npe)
         {
             throw new ApiException(404, "Error could not find instructor", npe);
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             throw new ApiException(401, "Error finding lessons for instructor", e);
         }

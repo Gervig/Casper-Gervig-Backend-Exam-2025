@@ -33,39 +33,25 @@ public class InstructorDAO implements IDAO<Instructor, Long>
         {
             em.getTransaction().begin();
 
-            // Check if the instructor has an ID (i.e., if it already exists)
-            if (instructor.getId() != null)
+            Instructor existingInstructor = findByUniqueFields(em, instructor);
+
+            if (existingInstructor != null)
             {
-                // The instructor already exists, no need to persist, just merge
-                em.merge(instructor); // Ensure we're merging the existing one
-            } else
-            {
-                // Attempt to persist the new instructor
-                try
-                {
-                    em.persist(instructor); // Try to persist the new instructor
-                } catch (PersistenceException pe)
-                {
-                    if (pe.getCause() instanceof ConstraintViolationException)
-                    {
-                        // If there's a unique constraint violation, fetch the existing instructor
-                        em.getTransaction().rollback();
-                        return findExistingInstructor(em, instructor);
-                    } else
-                    {
-                        throw pe; // Rethrow if the exception is not a unique constraint violation
-                    }
-                }
+                em.getTransaction().commit();
+                return existingInstructor;
             }
+
+            em.persist(instructor);
             em.getTransaction().commit();
             return instructor;
+
         } catch (Exception e)
         {
             throw new ApiException(401, "Error creating or fetching instructor", e);
         }
     }
 
-    private Instructor findExistingInstructor(EntityManager em, Instructor instructor)
+    private Instructor findByUniqueFields(EntityManager em, Instructor instructor)
     {
         try
         {
@@ -78,7 +64,7 @@ public class InstructorDAO implements IDAO<Instructor, Long>
                     .getSingleResult();
         } catch (NoResultException e)
         {
-            throw new ApiException(500, "Instructor exists but could not be retrieved", e);
+            return null;
         }
     }
 
