@@ -17,17 +17,20 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserDAOTest // only works one by one, due to IDs being Strings
+class UserDAOTest
 {
     private static final EntityManagerFactory emf = HibernateConfig.getEntityManagerFactoryForTest();
     private static final UserDAO userDAO = UserDAO.getInstance(emf);
     private static final RoleDAO roleDAO = RoleDAO.getInstance(emf);
-    private static List<User> users = UserPopulator.populate();
-    private static List<Role> roles = RolePopulator.populate();
+    private List<User> users;
+    private List<Role> roles;
 
     @BeforeEach
     void setup()
     {
+        users = UserPopulator.populate();
+        roles = RolePopulator.populate();
+
         try (EntityManager em = emf.createEntityManager())
         {
             em.getTransaction().begin();
