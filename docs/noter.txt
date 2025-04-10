@@ -1,7 +1,6 @@
 * Intro
 	- REST API
 	- Ski Lesson & Instructor
-	-
 * ERD v1 og v2
 * Location entity
 * Ny populate
