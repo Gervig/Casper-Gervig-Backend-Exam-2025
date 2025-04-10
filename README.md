@@ -19,7 +19,7 @@ Backend system for an e-commerce platform offering ski instructor services. The 
 
 ### Config properties
 
-To run this project first create a resources folder in the src/main/java directory. In this folder create a "config.properties" file with the following lines:
+To run this project first create a resources folder in the src/main directory. In this folder create a "config.properties" file with the following lines:
 
 * DB_NAME=insert your own database name here
 * DB_USERNAME=postgres
