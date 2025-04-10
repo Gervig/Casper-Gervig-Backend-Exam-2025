@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 @ToString
 @Entity
+//TODO add unique constraints for a lesson (and DAO logic to handle it)
 public class SkiLesson
 {
     // all attributes have setters, except id. I could have added @Setter to the class otherwise
