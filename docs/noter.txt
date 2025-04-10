@@ -8,5 +8,6 @@
 	- Instructor, unique constraint
 * Alle tests virker på engang
 * Deploy
+    - workflow.yml
 	- GitHub actions, tests
 	- Dataduck
