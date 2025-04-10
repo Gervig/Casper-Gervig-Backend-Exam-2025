@@ -91,6 +91,7 @@ public class SkiLessonController implements ISkiLesson<SkiLessonDTO, Long>
         }
 
         //TODO figure out a cleaner way to do this
+        // could have used HTTP PATCH instead of PUT
 
         // ensures no null values
         if(lessonDTO.getStarttime() != null) existingLesson.setStarttime(lessonDTO.getStarttime());
