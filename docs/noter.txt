@@ -1,0 +1,12 @@
+* Intro
+	- REST API
+	- Ski Lesson & Instructor
+	-
+* ERD v1 og v2
+* Location entity
+* Ny populate
+	- Instructor, unique constraint
+* Alle tests virker på engang
+* Deploy
+	- GitHub actions, tests
+	- Dataduck
