@@ -42,7 +42,7 @@ public class Routes
                     {
                         Long id = Long.valueOf(ctx.pathParam("id"));
                         SkiLessonDTO lessonDTO = skiLessonController.getLessonById(id);
-                        if(lessonDTO == null)
+                        if (lessonDTO == null)
                         {
                             throw new NullPointerException();
                         }
@@ -136,7 +136,16 @@ public class Routes
                 });
                 post("/populate", ctx ->
                 {
-                    skiLessonController.populate();
+                    try
+                    {
+                        skiLessonController.populate();
+                        ctx.json(objectMapper.createObjectNode().put("msg",
+                                "Database successfully populated"));
+                    } catch (Exception e)
+                    {
+                        ErrorMessage error = new ErrorMessage("Database failed to get populated");
+                        ctx.status(500).json(error);
+                    }
                 });
                 get("/fetch/{level}", ctx ->
                 {
@@ -149,13 +158,13 @@ public class Routes
                     Level level = Level.valueOf(ctx.pathParam("{level}"));
                     List<SkiLessonDTO> lessonDTOS = skiLessonController.fetchFromAPI(level);
                     int totalMinutes = 0;
-                    for(SkiLessonDTO l : lessonDTOS)
+                    for (SkiLessonDTO l : lessonDTOS)
                     {
                         totalMinutes += l.getDurationMinutes();
                     }
                     ctx.json(objectMapper.createObjectNode().put("msg",
                             "Total duration of instructions for ski lessons with level "
-                            + level + " is: " + totalMinutes + " minutes"));
+                                    + level + " is: " + totalMinutes + " minutes"));
                 });
                 get("/level/{level}", ctx ->
                 {
@@ -169,7 +178,7 @@ public class Routes
                     BigDecimal sum = skiLessonController.sumForInstructor(instructorId);
                     ctx.json(objectMapper.createObjectNode().put("msg",
                             "Total price for lessons for instructor with ID " + instructorId
-                            + " is: " + sum));
+                                    + " is: " + sum));
                 });
             });
         };
