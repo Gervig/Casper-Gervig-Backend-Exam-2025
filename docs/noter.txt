@@ -11,7 +11,7 @@
 * Alle tests virker på engang
 * Logging (logback.xml)
 * Deploy
-    - workflow.yml
+    - workflow.yml & Dockerfile
 	- GitHub actions, tests
 	- min hjemmeside, Dataduck.dk
 
