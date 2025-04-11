@@ -42,13 +42,11 @@ public class SkiLessonDTO
         if (includeDetails && skiLesson.getInstructor() != null)
         {
             this.instructor = new InstructorDTO(skiLesson.getInstructor(), false);
-//            this.instructor.getLessons().add(this); //TODO remove this if not needed
         }
 
         if(includeDetails && skiLesson.getLocation() != null)
         {
             this.location = new LocationDTO(skiLesson.getLocation(), false);
-//            this.location.getLessons().add(this); //TODO remove this if not needed
         }
 
     }
