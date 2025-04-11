@@ -15,4 +15,7 @@
 	- GitHub actions, tests
 	- min hjemmeside, Dataduck.dk
 
+EKSTRA
+* Security
+    - JWT, jwt.io
 * PUT vs PATCH
