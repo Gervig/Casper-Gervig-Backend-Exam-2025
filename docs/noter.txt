@@ -4,6 +4,7 @@
 	- http test requests & responses (JSON)
 * ERD v1 og v2
 * Location entity
+* Logging (logback.xml)
 * Ny populate
 	- Instructor, unique constraint
 * Alle tests virker på engang
