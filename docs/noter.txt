@@ -1,14 +1,18 @@
 * Intro
 	- REST API
 	- Ski Lesson & Instructor
+	    - ERD v1
+	- DAO, Entiteter vs DTOer
 	- http test requests & responses (JSON)
-* ERD v1 og v2
-* Location entity
-* Logging (logback.xml)
+* ERD v2
+    - Location Entity
 * Ny populate
 	- Instructor, unique constraint
 * Alle tests virker på engang
+* Logging (logback.xml)
 * Deploy
     - workflow.yml
 	- GitHub actions, tests
 	- Dataduck
+
+* PUT vs PATCH
