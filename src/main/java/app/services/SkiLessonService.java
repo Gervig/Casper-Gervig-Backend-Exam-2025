@@ -12,6 +12,8 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+// API url: https://apiprovider.cphbusinessapps.dk/skilesson
+
 public class SkiLessonService
 {
     private static final HttpClient client = HttpClient.newHttpClient();
