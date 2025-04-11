@@ -13,6 +13,6 @@
 * Deploy
     - workflow.yml
 	- GitHub actions, tests
-	- Dataduck
+	- min hjemmeside, Dataduck.dk
 
 * PUT vs PATCH
